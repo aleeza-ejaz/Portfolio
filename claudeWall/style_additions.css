@@ -1,0 +1,266 @@
+/* ============================================================
+   WALL PAGE — CAROUSEL CARD ADDITIONS
+   Add these rules to the bottom of your existing style.css.
+   They do not replace any existing rules — they only add new ones.
+   ============================================================ */
+
+
+/* ── NEW: Two-column grid for carousel cards ──────────────────
+   Replaces the old .wall-grid single-column on the Wall page.
+   Uses a modifier class (wall-grid--carousel) so your original
+   .wall-grid rule elsewhere is unaffected.
+──────────────────────────────────────────────────────────────── */
+.wall-grid--carousel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  gap: 16px;
+}
+
+
+/* ── NEW: Carousel card shell ────────────────────────────────
+   Replaces the old fixed-height .wall-card flex row.
+   Cards are now taller (580px) and stack vertically
+   (carousel on top, info panel below).
+──────────────────────────────────────────────────────────────── */
+.wall-grid--carousel .wall-card {
+  display: flex;
+  flex-direction: column;
+  height: 580px;               /* ← adjust this to taste */
+  cursor: default;             /* pointer only on the CTA button */
+}
+
+
+/* ── NEW: Carousel wrapper (top half of card) ────────────────
+   Takes up the remaining space above the fixed info panel.
+──────────────────────────────────────────────────────────────── */
+.card-carousel {
+  position: relative;
+  width: 100%;
+  flex: 1;                     /* fills whatever height is left */
+  overflow: hidden;
+  background: #080808;
+}
+
+.carousel-track-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.carousel-slide-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Swap this for an <img> once you have real project photos */
+.slide-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.18);
+  position: relative;
+}
+
+
+/* ── NEW: Caption overlay at bottom of carousel ─────────────── */
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, transparent 100%);
+  padding: 32px 18px 14px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.caption-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* ── NEW: Prev / Next arrow buttons ──────────────────────────
+   Arrows are invisible by default and fade in on card hover.
+──────────────────────────────────────────────────────────────── */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 4;
+  opacity: 0;                         /* hidden until hover */
+  transition: opacity 0.2s, background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+/* Reveal arrows when the whole card is hovered */
+.wall-card:hover .carousel-arrow {
+  opacity: 1;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.arrow-prev { left: 12px; }
+.arrow-next { right: 12px; }
+
+/* Dimmed state when at first / last slide */
+.carousel-arrow.dimmed {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+
+/* ── NEW: Dot indicators ─────────────────────────────────────── */
+.carousel-dots {
+  position: absolute;
+  bottom: 13px;
+  right: 14px;
+  display: flex;
+  gap: 5px;
+  z-index: 4;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  transition: background 0.25s, width 0.25s, border-radius 0.25s;
+  cursor: pointer;
+}
+
+/* Active dot stretches into a pill */
+.dot.active {
+  background: #fff;
+  width: 14px;
+  border-radius: var(--radius-pill);
+}
+
+
+/* ── NEW: Card info panel (bottom of card) ───────────────────
+   Replaces the old .wall-card-body layout.
+   Fixed height so the carousel always gets the rest.
+──────────────────────────────────────────────────────────────── */
+.wall-grid--carousel .card-body {
+  padding: 16px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.card-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.card-meta { flex: 1; min-width: 0; }
+
+/* .card-type and .card-title already exist — no changes needed */
+
+.card-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;        /* pushes tools + CTA to bottom of panel */
+}
+
+/* ── NEW: "Read case study" CTA button ───────────────────────
+   Sits inline in the card rather than below it.
+──────────────────────────────────────────────────────────────── */
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.35);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+  padding: 7px 15px;
+  white-space: nowrap;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.card-cta:hover {
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+  background: rgba(141, 121, 255, 0.08);
+}
+
+.cta-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.card-cta:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+
+/* ── NEW: Responsive — stack carousel above info on narrow screens */
+@media (max-width: 600px) {
+  .wall-grid--carousel {
+    grid-template-columns: 1fr;
+  }
+
+  .wall-grid--carousel .wall-card {
+    height: auto;            /* let it grow naturally on mobile */
+  }
+
+  .card-carousel {
+    height: 240px;           /* fixed carousel height on mobile */
+    flex: none;
+  }
+}
