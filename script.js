@@ -736,6 +736,8 @@ if (wallFilterBar) {
 }
 
 // ── Cloud — entry data & detail view ──────────────────────
+
+
 const entries = {
   portfolio: {
     type:  'Web · JavaScript',

@@ -3,28 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aleeza Ejaz | Cloud</title>
+  <title>Aleeza Ejaz | Work</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  
   <nav>
     <a href="index.html" class="nav-logo">ALEEZA EJAZ</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li class="dropdown">
-        <button class="dropdown-toggle">Art</button>
-        <ul class="dropdown-menu">
-          <li><a href="art.html">Gallery</a></li>
-          <li><a href="cloud.html">Cloud</a></li>
-          <li><a href="wall.html">Wall</a></li>
-        </ul>
-      </li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="gallery.html">Art</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </nav>
 
@@ -34,8 +31,8 @@
       <div class="page-hero-inner">
         <video class="hero-video" autoplay loop muted playsinline src="media/headerBackground.mp4"></video>
         <div class="hero-content">
-          <h1>CLOUD</h1>
-          <p class="hero-tagline">Development &amp; Documentation</p>
+          <h1>WORK</h1>
+          <p class="hero-tagline">Ideation &amp; Development</p>
         </div>
       </div>
     </section>
@@ -44,7 +41,7 @@
     <section class="cloud-section" id="cloud-list-section">
       <div class="cloud-inner">
 
-        <div class="section-header">
+        <div class="section-header" id="cloud-header">
           <span class="section-label">Technical Work</span>
           <h2>Dev Projects &amp; Docs</h2>
           <p class="section-sub">Code, write-ups, and technical explorations. Click any entry to read the full write-up.</p>
@@ -52,16 +49,13 @@
 
         <div class="filter-bar" role="group" aria-label="Filter entries">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="Web">Web</button>
-          <button class="filter-btn" data-filter="Python">Python</button>
-          <button class="filter-btn" data-filter="Java">Java</button>
-          <button class="filter-btn" data-filter="Docs">Docs</button>
+          <button class="filter-btn" data-filter="Web">Cloud</button>
+          <button class="filter-btn" data-filter="Python">Wall</button>
         </div>
 
         <ul class="cloud-list" id="cloud-list">
 
           <li class="cloud-entry" data-tags="Web" data-entry="portfolio">
-            <div class="cloud-entry-icon cloud-entry-icon--purple">⚡</div>
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Web · JavaScript</span>
               <h3 class="cloud-entry-title">Portfolio Website</h3>
@@ -77,7 +71,6 @@
           </li>
 
           <li class="cloud-entry" data-tags="Python" data-entry="dataanalysis">
-            <div class="cloud-entry-icon cloud-entry-icon--pink">🐍</div>
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Python · Data</span>
               <h3 class="cloud-entry-title">Data Analysis Project</h3>
@@ -89,11 +82,10 @@
                 <span class="tool-tag">2025</span>
               </div>
             </div>
-            <span class="cloud-entry-arrow" aria-hidden="true">→</span>
+            <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
           </li>
 
           <li class="cloud-entry" data-tags="Docs" data-entry="uxreport">
-            <div class="cloud-entry-icon cloud-entry-icon--blue">📄</div>
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Documentation · UX</span>
               <h3 class="cloud-entry-title">Resource Central — UX Report</h3>
@@ -105,11 +97,10 @@
                 <span class="tool-tag">2025</span>
               </div>
             </div>
-            <span class="cloud-entry-arrow" aria-hidden="true">→</span>
+            <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
           </li>
 
           <li class="cloud-entry" data-tags="Java" data-entry="javaproject">
-            <div class="cloud-entry-icon cloud-entry-icon--orange">☕</div>
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Java · OOP</span>
               <h3 class="cloud-entry-title">Java Class Project</h3>
@@ -121,7 +112,7 @@
                 <span class="tool-tag">2024</span>
               </div>
             </div>
-            <span class="cloud-entry-arrow" aria-hidden="true">→</span>
+            <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
           </li>
 
         </ul>
