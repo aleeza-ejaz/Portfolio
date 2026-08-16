@@ -566,12 +566,12 @@ nav {
   cursor: var(--cursor);
   transition: all 0.2s;
 }
-.filter-btn:hover,
-.filter-btn.active {
-  background: rgba(141,121,255,0.1);
-  border-color: var(---purple);
-  color: var(--purple);
-}
+
+.filter-btn:hover, .filter-btn.active {color:var(--purple); border-color: var(--purple); background:rgb(from var(--purple) r g b / 0.1);}
+.filter-btn.blue:hover, .filter-btn.active {color:var(--blue); border-color: var(--blue); background:rgb(from var(--blue) r g b / 0.1);}
+.filter-btn.orange:hover, .filter-btn.active {color:var(--orange); border-color: var(--orange); background:rgb(from var(--orange) r g b / 0.1);}
+.filter-btn.pink:hover, .filter-btn.active {color:var(--pink); border-color: var(--pink); background:rgb(from var(--pink) r g b / 0.1);}
+
 
 /* ── Tool tags (shared) ── */
 .tool-tag {
@@ -941,11 +941,9 @@ nav {
   max-width: 1300px;
 }
 
-.cloud-entry.orange {background: linear-gradient(90deg, hsla(0, 0%, 0%, 1) 64%, hsla(33, 97%, 60%, 1) 100%);
-}
-
-.cloud-entry.blue {background: linear-gradient(90deg, hsla(0, 0%, 0%, 1) 64%, hsla(195, 84%, 58%, 1) 100%);
-}
+.cloud-entry.orange {background: linear-gradient(90deg, var(--black) 64%, var(--orange) 100%);}
+.cloud-entry.pink {background: linear-gradient(90deg, var(--black) 64%, var(--pink) 100%);}
+.cloud-entry.blue {background: linear-gradient(90deg, var(--black) 64%, var(--blue) 100%);}
 
 .cloud-entry:hover {
   transform: translateX(5px);
@@ -967,13 +965,13 @@ nav {
 .cloud-entry-title {
   font-family: var(--font-display);
   font-size: 1.1rem;
-  color: var(--black);
+  color: var(--white);
   margin-bottom: 3px;
 }
 
 .cloud-entry-desc {
   font-size: 0.85rem;
-  color: rgba(0,0,0,0.45);
+  color: rgba(255,255,255,0.45);
   line-height: 1.5;
   margin-bottom: 8px;
 }
@@ -982,14 +980,14 @@ nav {
 
 .cloud-entry-arrow {
   font-size: 1rem;
-  color: rgba(0,0,0,0.18);
+  color: var(--white);
   align-self: center;
   flex-shrink: 0;
   transition: transform 0.2s, color 0.2s;
 }
 .cloud-entry:hover .cloud-entry-arrow {
   transform: translateX(4px);
-  color: var(--purple);
+  color: var(--black);
 }
 
 /* Cloud detail view */
@@ -1013,11 +1011,11 @@ nav {
 .back-btn:hover { color: var(--purple); }
 
 .cloud-detail {
-  background: var(--white);
+  width: 100%;
+  background: var(--black);
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 0.5px solid rgba(0,0,0,0.07);
-  max-width: 860px;
 }
 
 .cloud-detail-header {
@@ -1030,7 +1028,7 @@ nav {
 .cloud-detail-title {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  color: var(--black);
+  color: var(--white);
 }
 
 .cloud-detail-tags { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -1055,12 +1053,17 @@ nav {
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--purple);
   margin-bottom: 0.65rem;
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
+.cloud-section-label.purple { color: var(--purple);}
+.cloud-section-label.pink { color: var(--pink);}
+.cloud-section-label.blue { color: var(--blue);}
+.cloud-section-label.orange { color: var(--orange);}
+
 .cloud-section-label::after {
   content: '';
   flex: 1;

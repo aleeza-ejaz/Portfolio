@@ -14,7 +14,7 @@
     <a href="index.html" class="nav-logo">ALEEZA EJAZ</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="#projects">Work</a></li>
+      <li><a href="work.html">Work</a></li>
       <li><a href="gallery.html">Art</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -49,13 +49,14 @@
 
         <div class="filter-bar" role="group" aria-label="Filter entries">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="Web">Cloud</button>
-          <button class="filter-btn" data-filter="Python">Wall</button>
+          <button class="filter-btn blue" data-filter="Cloud">Cloud - Projects + Documentation </button>
+          <button class="filter-btn orange" data-filter="Wall">Wall - Ideation + Concept Work</button>
+          <button class="filter-btn pink" data-filter="Planet">Planet - Experimentation + Synthesis</button>
         </div>
 
         <ul class="cloud-list" id="cloud-list">
 
-          <li class="cloud-entry" data-tags="Web" data-entry="portfolio">
+          <li class="cloud-entry pink" data-tags="Planet" data-entry="portfolio">
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Web · JavaScript</span>
               <h3 class="cloud-entry-title">Portfolio Website</h3>
@@ -70,7 +71,7 @@
             <span class="cloud-entry-arrow" aria-hidden="true">→</span>
           </li>
 
-          <li class="cloud-entry" data-tags="Python" data-entry="dataanalysis">
+          <li class="cloud-entry blue" data-tags="Cloud" data-entry="dataanalysis">
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Python · Data</span>
               <h3 class="cloud-entry-title">Data Analysis Project</h3>
@@ -85,7 +86,7 @@
             <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
           </li>
 
-          <li class="cloud-entry" data-tags="Docs" data-entry="uxreport">
+          <li class="cloud-entry orange" data-tags="Wall" data-entry="uxreport">
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Documentation · UX</span>
               <h3 class="cloud-entry-title">Resource Central — UX Report</h3>
@@ -100,7 +101,7 @@
             <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
           </li>
 
-          <li class="cloud-entry" data-tags="Java" data-entry="javaproject">
+          <li class="cloud-entry blue" data-tags="Cloud" data-entry="javaproject">
             <div class="cloud-entry-info">
               <span class="cloud-entry-type">Java · OOP</span>
               <h3 class="cloud-entry-title">Java Class Project</h3>
@@ -125,7 +126,7 @@
     <!-- DETAIL VIEW (hidden by default, shown via JS) -->
     <section class="cloud-detail-section" id="cloud-detail-section" style="display:none;">
       <div class="cloud-inner">
-        <button class="back-btn" id="cloud-back-btn">← Back to Cloud</button>
+        <button class="back-btn" id="cloud-back-btn">← Back to Work</button>
         <article class="cloud-detail" id="cloud-detail-content">
           <!-- populated by JS -->
         </article>
