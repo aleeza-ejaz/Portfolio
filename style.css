@@ -106,8 +106,8 @@ code {
 .background-blue {background: var(--blue); }
 .background-pink {background: var(--pink); }
 .background-orange {background: var(--orange); }
+.background-purple {background: var(--purple); }
 .mono          { font-family: var(--font-mono); font-size: 0.9em; }
-.serif-em      { font-family: var(--font-display); font-style: italic; }
 
 /* ── Navigation ── */
 nav {
@@ -185,7 +185,7 @@ nav {
   position: relative;
   display: flex;
   margin-top: 3rem;
-  padding: clamp(100px, 20vw, 100px);
+  padding: clamp(1rem, 6vw, 6.25rem);
   align-items: center;
   justify-content: center;
   background-color: #000;
@@ -226,8 +226,8 @@ nav {
 
 .hero-icon {
   position: relative;
-  width: clamp(120px, 12vw, 120px);
-  margin-top: -3rem;
+  width: clamp(1.5rem, 15vw, 7.5rem);
+  margin-top: clamp(-1.5rem, 6vw, -3rem);
   z-index: 3;
   filter: drop-shadow(0 4px 12px rgba(102,113,233,0.4));
   animation: float 4s ease-in-out infinite;
@@ -258,6 +258,7 @@ nav {
   position: relative;
   margin: var(--section-pad) auto;
   max-width: 1300px;
+  height: clamp(22rem, 9vw, 30rem);
   padding: clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 4rem);
   border-radius: var(--radius-lg) 0 var(--radius-lg) 0;
   background: rgb(255, 255, 255);
@@ -328,7 +329,7 @@ nav {
  
 .projects-card { 
   width: 100%;
-  height: 6.5rem;
+  height: 6rem;
   background: var(--black);
   border-radius: var(--radius-lg) 0 var(--radius-lg) 0;
   justify-content: center;
@@ -336,9 +337,29 @@ nav {
   padding: 2rem;
 }
 
+@media (max-width: 700px) {
+  .projects-card { 
+  width: 100%;
+  height: 7rem;
+  background: var(--black);
+  border-radius: var(--radius-lg) 0 var(--radius-lg) 0;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: left;
+}
+
+.projects-card.contact {
+   height: 10rem;
+   
+}
+  
+}
+
 .projects-card.orange {background: linear-gradient(90deg, var(--black) 64%, var(--orange) 100%);}
 .projects-card.blue {background: linear-gradient(90deg, var(--black) 64%, var(--blue) 100%);}
 .projects-card.pink {background: linear-gradient(90deg, var(--black) 64%, var(--pink) 100%);}
+.projects-card.purple {background: linear-gradient(90deg, var(--black) 64%, var(--purple) 100%);}
 
 .projects-heading {
   font-family: var(--font-display);
@@ -350,7 +371,7 @@ nav {
   color: var(--white);
   justify-content: center;
   text-align: center;
-  font-family: var(--font-mono);
+  font-family: var(--font-mono);  
 }
 
 .projects-title {
@@ -367,23 +388,24 @@ nav {
 .projects-card:hover .projects-subheading--orange { color: var(--orange);}
 .projects-card:hover .projects-subheading--blue { color: var(--blue);}
 .projects-card:hover .projects-subheading--pink { color: var(--pink);}
+.projects-card:hover .projects-subheading--purple { color: var(--purple);}
  
 .projects-card .work-category-label {
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  flex-wrap: wrap;
+  white-space: normal;
 }
  
 
 
-/* ── Resume Button ── */
-.resume-button-container {
+/* ──  Button ── */
+.button-container {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: -2rem;
+  margin-top: clamp(-2rem, 1vw, -3rem);
   margin-bottom: 5rem;
 }
-.resume-button {
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -394,8 +416,19 @@ nav {
   background-color: var(--purple);
   border: none;
   cursor: var(--cursor);
-   transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
 }
+
+.button.blue { 
+ background-color: var(--blue);
+}
+
+@media (max-width: 700px) {
+  .button { 
+    padding: 0.5rem 1.25rem;
+  }
+}
+
 .button:hover {
   transform: scale(1.08);
   box-shadow: var(--shadow-lift);
@@ -404,7 +437,7 @@ nav {
   transform: scale(1.02);
 }
  
-.resume-text {
+.button-text {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.14em;
@@ -500,7 +533,7 @@ nav {
   z-index: 2;
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  font-size: clamp(1rem, 3.5vw, 3rem);
   color: var(--white);
   filter: drop-shadow(0 4px 12px rgba(228,128,255,0.4));
   text-align: center;
@@ -690,7 +723,7 @@ nav {
 
 .cloud-entry-desc {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.45);
+  color: var(--white);
   line-height: 1.5;
   margin-bottom: 8px;
 }
@@ -882,6 +915,7 @@ footer {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
+  margin: -1rem;
   color: var(--white);
 }
 
@@ -891,6 +925,7 @@ footer {
   font-size: 0.85rem;
   color: rgba(255,255,255,0.5);
   transition: color 0.2s;
+  cursor: var(--cursor);
 }
 .footer-links a:hover { color: var(--purple); }
 
