@@ -674,14 +674,15 @@ nav {
   color: rgba(255,255,255,0.55);
   letter-spacing: 0.06em;
 }
-/* ── Cloud page ── */
-.cloud-section { padding: var(--section-pad) var(--page-margin); }
+/* ── Work page ── */
+.work-list-section,
+.work-detail-section { padding: var(--section-pad) var(--page-margin); }
 
-.cloud-inner { max-width: 1300px; margin: 0 auto; }
+.work-inner { max-width: 1300px; margin: 0 auto; }
 
-.cloud-list { display: flex; flex-direction: column; gap: 10px; }
+.work-list { display: flex; flex-direction: column; gap: 10px; }
 
-.cloud-entry {
+.work-entry {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -693,58 +694,87 @@ nav {
   max-width: 1300px;
 }
 
-.cloud-entry.orange {background: linear-gradient(90deg, var(--black) 64%, var(--orange) 100%);}
-.cloud-entry.pink {background: linear-gradient(90deg, var(--black) 64%, var(--pink) 100%);}
-.cloud-entry.blue {background: linear-gradient(90deg, var(--black) 64%, var(--blue) 100%);}
+/* Card gradient is driven by the same color keyword as everything else
+   on the card — set once in JS from the project's `category`. */
+.work-entry.orange { background: linear-gradient(90deg, var(--black) 64%, var(--orange) 100%); }
+.work-entry.blue   { background: linear-gradient(90deg, var(--black) 64%, var(--blue) 100%); }
+.work-entry.pink   { background: linear-gradient(90deg, var(--black) 64%, var(--pink) 100%); }
+.work-entry.purple { background: linear-gradient(90deg, var(--black) 64%, var(--purple) 100%); }
 
-.cloud-entry:hover {
+.work-entry:hover {
   transform: translateX(5px);
   box-shadow: 0 4px 20px rgba(141,121,255,0.1);
 }
 
-.cloud-entry-info { flex: 1; min-width: 0; }
+.work-entry-info { flex: 1; min-width: 0; }
 
-.cloud-entry-type {
+.work-entry-type {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
-  color: var(--purple);
+  color: rgba(255,255,255,0.55);
   text-transform: uppercase;
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 6px;
 }
 
-.cloud-entry-title {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--white);
-  margin-bottom: 3px;
-}
-
-.cloud-entry-desc {
+.work-entry-desc {
   font-size: 0.85rem;
-  color: var(--white);
+  color: rgba(255,255,255,0.75);
   line-height: 1.5;
-  margin-bottom: 8px;
+  margin: 6px 0 10px;
 }
 
-.cloud-entry-tags { display: flex; gap: 4px; flex-wrap: wrap; }
-
-.cloud-entry-arrow {
+.work-entry-arrow {
   font-size: 1rem;
   color: var(--white);
   align-self: center;
   flex-shrink: 0;
-  transition: transform 0.2s, color 0.2s;
+  transition: transform 0.2s;
 }
-.cloud-entry:hover .cloud-entry-arrow {
-  transform: translateX(4px);
-  color: var(--black);
+.work-entry:hover .work-entry-arrow { transform: translateX(4px); }
+
+/* ── Title highlight — same "marker" treatment as .projects-heading
+   span.background-* on the homepage, sized for the work list/detail ── */
+.work-entry-title,
+.work-detail-title {
+  font-family: var(--font-display);
+  font-style: italic;
 }
 
-/* Cloud detail view */
-.cloud-detail-section { padding: var(--section-pad) var(--page-margin); }
+.work-title-highlight {
+  display: inline-block;
+  color: var(--white);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.work-title-highlight.blue   { background: var(--blue); }
+.work-title-highlight.orange { background: var(--orange); }
+.work-title-highlight.pink   { background: var(--pink); }
+.work-title-highlight.purple { background: var(--purple); }
 
+/* ── Tags — bright solid "circle" chips, cycling the accent palette ── */
+.work-entry-tags,
+.work-detail-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.work-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--black);
+  border: 1px solid var(--tag-color, rgba(255,255,255,0.3));
+  color: var(--white);
+}
+.work-tag.blue   { --tag-color: var(--blue); }
+.work-tag.pink   { --tag-color: var(--pink); }
+.work-tag.orange { --tag-color: var(--orange); }
+.work-tag.purple { --tag-color: var(--purple); }
+
+/* ── Detail view ── */
 .back-btn {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -762,7 +792,7 @@ nav {
 }
 .back-btn:hover { color: var(--purple); }
 
-.cloud-detail {
+.work-detail {
   width: 100%;
   background: var(--black);
   border-radius: var(--radius-lg);
@@ -770,37 +800,29 @@ nav {
   border: 0.5px solid rgba(0,0,0,0.07);
 }
 
-.cloud-detail-header {
+.work-detail-header {
   padding: 2.5rem 2.5rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.cloud-detail-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  color: var(--white);
-}
+.work-detail-title { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
 
-.cloud-detail-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-
-.cloud-detail-divider {
+.work-detail-divider {
   border: none;
   border-top: 1px solid rgba(0,0,0,0.07);
   margin: 0 2.5rem;
 }
 
-.cloud-detail-body {
+.work-detail-body {
   padding: 1.75rem 2.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.cloud-section {}
-
-.cloud-section-label {
+.work-block-label {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.12em;
@@ -810,73 +832,38 @@ nav {
   align-items: center;
   gap: 8px;
 }
-
-.cloud-section-label.purple { color: var(--purple);}
-.cloud-section-label.pink { color: var(--pink);}
-.cloud-section-label.blue { color: var(--blue);}
-.cloud-section-label.orange { color: var(--orange);}
-
-.cloud-section-label::after {
+.work-block-label.purple { color: var(--purple); }
+.work-block-label.pink   { color: var(--pink); }
+.work-block-label.blue   { color: var(--blue); }
+.work-block-label.orange { color: var(--orange); }
+.work-block-label::after {
   content: '';
   flex: 1;
   height: 1px;
   background: rgba(141,121,255,0.15);
 }
 
-.cloud-section-text {
+.work-block-text {
   font-size: 0.95rem;
   color: rgba(0,0,0,0.6);
   line-height: 1.85;
 }
 
-.code-block {
-  background: #0a0a0a;
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  margin-top: 0.75rem;
-  overflow-x: auto;
-}
-
-.code-label {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: rgba(255,255,255,0.3);
-  letter-spacing: 0.08em;
-  margin-bottom: 8px;
-}
-
-.code-block pre {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: #e2e8f0;
-  line-height: 1.75;
-  white-space: pre;
-}
-
-.code-block code {
-  font-family: inherit;
-  font-size: inherit;
-  background: none;
-  color: inherit;
-  padding: 0;
-  border-radius: 0;
-}
-
-.cloud-outcome-box {
+.work-outcome-box {
   background: rgba(141,121,255,0.06);
   border: 1px solid rgba(141,121,255,0.16);
   border-radius: 12px;
   padding: 1rem 1.25rem;
 }
-.cloud-outcome-box p {
+.work-outcome-box p {
   font-size: 0.95rem;
   color: rgba(0,0,0,0.6);
   line-height: 1.8;
 }
 
-.cloud-detail-links { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 0.5rem; }
+.work-detail-links { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 0.5rem; }
 
-.cloud-link {
+.work-link {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.05em;
@@ -886,16 +873,19 @@ nav {
   color: rgba(0,0,0,0.5);
   transition: all 0.2s;
 }
-.cloud-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(141,121,255,0.07); }
+.work-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(141,121,255,0.07); }
 
-.cloud-link--primary {
+.work-link--primary {
   background: var(--black);
   color: var(--white);
   border-color: var(--black);
 }
-.cloud-link--primary:hover { background: #1a0050; border-color: var(--purple); color: var(--white); }
+.work-link--primary:hover { background: #1a0050; border-color: var(--purple); color: var(--white); }
 
-/* ── Footer ── */
+/* code-block, code-label, no-results, section-header, filter-bar, tool-tag
+   are page-generic and stay exactly as they already are in style.css. */
+/* -- Footer --*/
+
 footer {
   background: var(--black);
   border-top: 1px solid rgba(255,255,255,0.07);

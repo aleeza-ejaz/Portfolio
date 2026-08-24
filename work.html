@@ -38,10 +38,10 @@
     </section>
 
     <!-- LIST VIEW -->
-    <section class="cloud-section" id="cloud-list-section">
-      <div class="cloud-inner">
+    <section class="work-list-section" id="work-list-section">
+      <div class="work-inner">
 
-        <div class="section-header" id="cloud-header">
+        <div class="section-header" id="work-header">
           <span class="section-label">Technical Work</span>
             <h2 class="projects-title">PROJECTS, DOCUMENTATION, & MORE</h2>
           <p class="section-sub">Click any entry to read the full write-up.</p>
@@ -54,80 +54,19 @@
           <button class="filter-btn pink" data-filter="Planet">Planet - Experimentation + Synthesis</button>
         </div>
 
-        <ul class="cloud-list" id="cloud-list">
+        <!-- Populated at runtime from work-data.json (see script.js: buildWorkList) -->
+        <ul class="work-list" id="work-list"></ul>
 
-          <li class="cloud-entry pink" data-tags="Planet" data-entry="portfolio">
-            <div class="cloud-entry-info">
-              <span class="cloud-entry-type">Web · JavaScript</span>
-              <h3 class="cloud-entry-title background pink">Portfolio Website</h3>
-              <p class="cloud-entry-desc">Built from scratch — responsive, animated, designed entirely by me.</p>
-              <div class="cloud-entry-tags">
-                <span class="tool-tag">HTML</span>
-                <span class="tool-tag">CSS</span>
-                <span class="tool-tag">JavaScript</span>
-                <span class="tool-tag">2026</span>
-              </div>
-            </div>
-            <span class="cloud-entry-arrow" aria-hidden="true">→</span>
-          </li>
-
-          <li class="cloud-entry blue" data-tags="Cloud" data-entry="dataanalysis">
-            <div class="cloud-entry-info">
-              <span class="cloud-entry-type">Python · Data</span>
-              <h3 class="cloud-entry-title">Data Analysis Project</h3>
-              <p class="cloud-entry-desc">Exploratory data analysis and visualization for a class research project.</p>
-              <div class="cloud-entry-tags">
-                <span class="tool-tag">Python</span>
-                <span class="tool-tag">Pandas</span>
-                <span class="tool-tag">Matplotlib</span>
-                <span class="tool-tag">2025</span>
-              </div>
-            </div>
-            <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
-          </li>
-
-          <li class="cloud-entry orange" data-tags="Wall" data-entry="uxreport">
-            <div class="cloud-entry-info">
-              <span class="cloud-entry-type">Documentation · UX</span>
-              <h3 class="cloud-entry-title">Resource Central — UX Report</h3>
-              <p class="cloud-entry-desc">Full UX research write-up: user testing, wireframes, and findings.</p>
-              <div class="cloud-entry-tags">
-                <span class="tool-tag">UX Research</span>
-                <span class="tool-tag">Figma</span>
-                <span class="tool-tag">PDF</span>
-                <span class="tool-tag">2025</span>
-              </div>
-            </div>
-            <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
-          </li>
-
-          <li class="cloud-entry blue" data-tags="Cloud" data-entry="javaproject">
-            <div class="cloud-entry-info">
-              <span class="cloud-entry-type">Java · OOP</span>
-              <h3 class="cloud-entry-title">Java Class Project</h3>
-              <p class="cloud-entry-desc">Object-oriented application built for an intro to programming course.</p>
-              <div class="cloud-entry-tags">
-                <span class="tool-tag">Java</span>
-                <span class="tool-tag">OOP</span>
-                <span class="tool-tag">GitHub</span>
-                <span class="tool-tag">2024</span>
-              </div>
-            </div>
-            <span class="cloud-entry-arrow" id="doc-arrow" aria-hidden="true">→</span>
-          </li>
-
-        </ul>
-
-        <p class="no-results" id="cloud-no-results" aria-live="polite" style="display:none;">No entries match that filter yet — check back soon.</p>
+        <p class="no-results" id="work-no-results" aria-live="polite" style="display:none;">No entries match that filter yet — check back soon.</p>
 
       </div>
     </section>
 
     <!-- DETAIL VIEW (hidden by default, shown via JS) -->
-    <section class="cloud-detail-section" id="cloud-detail-section" style="display:none;">
-      <div class="cloud-inner">
-        <button class="back-btn" id="cloud-back-btn">← Back to Work</button>
-        <article class="cloud-detail" id="cloud-detail-content">
+    <section class="work-detail-section" id="work-detail-section" style="display:none;">
+      <div class="work-inner">
+        <button class="back-btn" id="work-back-btn">← Back to Work</button>
+        <article class="work-detail" id="work-detail-content">
           <!-- populated by JS -->
         </article>
       </div>

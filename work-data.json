@@ -1,0 +1,133 @@
+{
+  "projects": [
+    {
+      "id": "portfolio",
+      "category": "Planet",
+      "type": "Web · JavaScript",
+      "title": "Portfolio Website",
+      "description": "Built from scratch — responsive, animated, designed entirely by me.",
+      "tags": ["HTML", "CSS", "JavaScript", "2026"],
+      "sections": [
+        {
+          "label": "Overview",
+          "content": "This portfolio was designed and built entirely from scratch — no templates, no frameworks. The goal was to create something that felt genuinely <strong>mine</strong>: playful but professional, animated but readable, and technically solid under the hood."
+        },
+        {
+          "label": "The Challenge",
+          "content": "Most portfolio templates feel generic. I wanted the site to reflect my dual background in <strong>design and development</strong> — meaning the code itself needed to be as considered as the visuals. That meant building each component intentionally: no Bootstrap grid, no copy-paste CSS."
+        },
+        {
+          "label": "Key Implementation",
+          "content": "The skills marquee uses a duplicated list and a CSS <code>@keyframes</code> animation so it loops infinitely without JavaScript. Edge fades are handled entirely with <code>mask-image</code>. The modal system on the Wall page is vanilla JS — no libraries.",
+          "code": {
+            "label": "style.css — marquee animation",
+            "body": ".skills-track {\n  animation: marquee 24s linear infinite;\n}\n@keyframes marquee {\n  0%   { transform: translateX(0); }\n  100% { transform: translateX(-50%); }\n}"
+          }
+        },
+        {
+          "label": "What I Learned",
+          "content": "Working without a framework forced me to deeply understand <strong>CSS layout fundamentals</strong> — especially how stacking contexts, <code>position: sticky</code>, and <code>clamp()</code> interact. I also hit cross-browser issues with <code>backdrop-filter</code> that taught me to test on Safari early."
+        },
+        {
+          "label": "Outcome",
+          "type": "outcome",
+          "content": "A fully responsive, accessible portfolio site with custom animations, zero dependencies, and a clear design system — built and shipped for my 2026 job search."
+        }
+      ],
+      "links": [
+        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" },
+        { "label": "Live Site ↗", "primary": false, "href": "#" }
+      ]
+    },
+    {
+      "id": "dataanalysis",
+      "category": "Cloud",
+      "type": "Python · Data",
+      "title": "Data Analysis Project",
+      "description": "Exploratory data analysis and visualization for a class research project.",
+      "tags": ["Python", "Pandas", "Matplotlib", "2025"],
+      "sections": [
+        {
+          "label": "Overview",
+          "content": "A class project exploring a real-world dataset using Python. The goal was to move from raw CSV data to <strong>clear, communicable findings</strong> through cleaning, analysis, and visualization."
+        },
+        {
+          "label": "Approach",
+          "content": "Used Pandas for data cleaning and aggregation, then Matplotlib for charting. Prioritised readability over complexity — the audience was classmates, not data scientists."
+        },
+        {
+          "label": "Key Code",
+          "content": "Loading and summarising the dataset:",
+          "code": {
+            "label": "analysis.py",
+            "body": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('data.csv')\ndf.dropna(inplace=True)\n\nsummary = df.groupby('category')['value'].mean()\nsummary.plot(kind='bar', color='#8d79ff')\nplt.tight_layout()\nplt.savefig('output.png', dpi=150)"
+          }
+        },
+        {
+          "label": "Outcome",
+          "type": "outcome",
+          "content": "A clean analysis with three data visualizations and a written interpretation. Submitted as part of a research methods course."
+        }
+      ],
+      "links": [
+        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" }
+      ]
+    },
+    {
+      "id": "uxreport",
+      "category": "Wall",
+      "type": "Documentation · UX",
+      "title": "Resource Central — UX Report",
+      "description": "Full UX research write-up: user testing, wireframes, and findings.",
+      "tags": ["UX Research", "Figma", "PDF", "2025"],
+      "sections": [
+        {
+          "label": "Overview",
+          "content": "A full UX research write-up documenting the end-to-end design process for Resource Central — from initial user interviews through to final prototype and usability test results."
+        },
+        {
+          "label": "Contents",
+          "content": "The report covers: <strong>research methodology</strong>, interview transcripts and affinity mapping, information architecture decisions, wireframe progression (low to high fidelity), usability test protocol and findings, and final design rationale."
+        },
+        {
+          "label": "Outcome",
+          "type": "outcome",
+          "content": "A 24-page documented research process that can stand alone as a portfolio artifact or be shared with employers as evidence of UX process thinking."
+        }
+      ],
+      "links": [
+        { "label": "Download PDF ↗", "primary": true, "href": "#" }
+      ]
+    },
+    {
+      "id": "javaproject",
+      "category": "Cloud",
+      "type": "Java · OOP",
+      "title": "Java Class Project",
+      "description": "Object-oriented application built for an intro to programming course.",
+      "tags": ["Java", "OOP", "GitHub", "2024"],
+      "sections": [
+        {
+          "label": "Overview",
+          "content": "An object-oriented Java application built for an intro to programming course. The project modelled a simple inventory system using core OOP principles: <strong>encapsulation, inheritance, and polymorphism</strong>."
+        },
+        {
+          "label": "Structure",
+          "content": "The application used a three-layer class hierarchy with a base <code>Item</code> class, extended by <code>PhysicalItem</code> and <code>DigitalItem</code>, each overriding a shared <code>display()</code> method.",
+          "code": {
+            "label": "Item.java",
+            "body": "public class Item {\n  private String name;\n  private double price;\n\n  public Item(String name, double price) {\n    this.name  = name;\n    this.price = price;\n  }\n\n  public void display() {\n    System.out.println(name + \" — $\" + price);\n  }\n}"
+          }
+        },
+        {
+          "label": "Outcome",
+          "type": "outcome",
+          "content": "A working inventory management CLI application demonstrating foundational OOP concepts. Submitted with full Javadoc documentation."
+        }
+      ],
+      "links": [
+        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" }
+      ]
+    }
+  ]
+}
