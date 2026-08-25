@@ -3,26 +3,22 @@
     {
       "id": "portfolio",
       "category": "Planet",
-      "type": "Web · JavaScript",
+      "type": "Web Development· UI/UX Design",
       "title": "Portfolio Website",
-      "description": "Built from scratch — responsive, animated, designed entirely by me.",
+      "description": "An archive of my work brought online.",
       "tags": ["HTML", "CSS", "JavaScript", "2026"],
       "sections": [
         {
           "label": "Overview",
-          "content": "This portfolio was designed and built entirely from scratch — no templates, no frameworks. The goal was to create something that felt genuinely <strong>mine</strong>: playful but professional, animated but readable, and technically solid under the hood."
+          "content": "Portfolios are meant to convey a designer's voice. As a perfected body of work, they stand to deliver thoughts, experiments, finished products, and the processes that led to them. In this way, they act as an extension of the artist.\n<br><br>In my Spring 2026 semester, I took a Web Design course offered by my university. We were taught the fundamentals of front-end development, along with the importance of establishing an online brand for creatives in this day and age. This portfolio website serves as my platform to share my work."
         },
         {
           "label": "The Challenge",
-          "content": "Most portfolio templates feel generic. I wanted the site to reflect my dual background in <strong>design and development</strong> — meaning the code itself needed to be as considered as the visuals. That meant building each component intentionally: no Bootstrap grid, no copy-paste CSS."
+          "content": "How could I convey, 'Hi, I'm Aleeza, and this is what I do' through an website that reflects my approach to design?"
         },
         {
-          "label": "Key Implementation",
-          "content": "The skills marquee uses a duplicated list and a CSS <code>@keyframes</code> animation so it loops infinitely without JavaScript. Edge fades are handled entirely with <code>mask-image</code>. The modal system on the Wall page is vanilla JS — no libraries.",
-          "code": {
-            "label": "style.css — marquee animation",
-            "body": ".skills-track {\n  animation: marquee 24s linear infinite;\n}\n@keyframes marquee {\n  0%   { transform: translateX(0); }\n  100% { transform: translateX(-50%); }\n}"
-          }
+          "label": "The Details",
+          "content": "Tech Stack \n~> HTML5: Structure, original artwork, text\n~> CSS3: Stylization, including set color pallettes, typography, and overall aesthetic"
         },
         {
           "label": "What I Learned",

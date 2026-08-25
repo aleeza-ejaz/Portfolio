@@ -156,7 +156,7 @@ function buildWorkDetail(id) {
   const color = categoryColor(p.category);
 
   workDetailContent.innerHTML = `
-    <div class="work-detail-header">
+    <div class="work-detail-header ${color}">
       <span class="section-label">${p.type}</span>
       <h2 class="work-detail-title">${highlightedTitle(p.title, color)}</h2>
       <div class="work-detail-tags">${renderTags(p.tags, color)}</div>
