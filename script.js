@@ -77,8 +77,8 @@ document.querySelectorAll('.filter-bar').forEach(wireFilterBar);
 // ── Work page — category color mapping ─────────────────────
 // Single source of truth: a project's `category` field drives every bit of
 // color on the card automatically — the gradient background, the title
-// highlight, and (in rotation) the tag chips. Add a 4th category later by
-// adding one line here.
+// highlight, and the tag chips. Add a 4th category later by adding one
+// line here.
 const CATEGORY_COLORS = {
   Cloud:  'blue',
   Wall:   'orange',
@@ -97,6 +97,162 @@ function highlightedTitle(title, color) {
 // black-to-color gradient as the card background, just on a small pill.
 function renderTags(tags, color) {
   return tags.map(t => `<span class="work-tag ${color}">${t}</span>`).join('');
+}
+
+
+// ── Content file parser ──────────────────────────────────────
+// Turns a plain .txt file into an array of section objects. The only
+// syntax it understands:
+//   ## Label            -> starts a new section (plain text)
+//   ## Label {box}      -> sidebar box; one item per line
+//   ## Label {outcome}  -> highlighted outcome box
+//   ## Label {gallery}  -> image carousel; lines are "path | caption"
+//   ## Label {image}    -> single embedded image; "path | caption"
+//   blank line          -> paragraph break, preserved exactly as typed
+//   **text**            -> bold
+//   `text`              -> inline code
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function formatInline(text) {
+  return escapeHtml(text)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`(.+?)`/g, '<code>$1</code>');
+}
+
+function parseContentFile(text) {
+  const lines = text.replace(/\r\n/g, '\n').split('\n');
+  const sections = [];
+  let current = null;
+
+  lines.forEach(line => {
+    const header = line.match(/^##\s+(.+?)(?:\s*\{(\w+)\})?\s*$/);
+    if (header) {
+      if (current) sections.push(current);
+      current = { label: header[1].trim(), type: header[2] || null, raw: [] };
+    } else if (current) {
+      current.raw.push(line);
+    }
+  });
+  if (current) sections.push(current);
+
+  return sections.map(s => {
+    const body = s.raw.join('\n').trim();
+
+    if (s.type === 'gallery' || s.type === 'image') {
+      const images = body.split('\n').filter(Boolean).map(line => {
+        const [src, caption] = line.split('|').map(x => x.trim());
+        return { src, caption: caption || '' };
+      });
+      return { label: s.label, type: s.type, images };
+    }
+
+    if (s.type === 'box') {
+      const items = body.split('\n').map(l => l.trim()).filter(Boolean);
+      return { label: s.label, type: 'box', items };
+    }
+
+    const paragraphs = body.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+    return { label: s.label, type: s.type, paragraphs };
+  });
+}
+
+
+// ── Content file section renderer ───────────────────────────
+function renderSection(s, color) {
+  if (s.type === 'image') {
+    const img = s.images[0];
+    if (!img) return '';
+    return `<div class="work-block">
+      <div class="work-block-label ${color}">${s.label}</div>
+      <figure class="work-single-image">
+        <img src="${img.src}" alt="${img.caption || s.label}" loading="lazy">
+        ${img.caption ? `<figcaption>${img.caption}</figcaption>` : ''}
+      </figure>
+    </div>`;
+  }
+
+  if (s.type === 'gallery') {
+    const slidesHTML = s.images.map(img => `
+      <div class="carousel-slide">
+        <div class="carousel-slide-inner">
+          <img src="${img.src}" alt="${img.caption || s.label}" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>`).join('');
+    const dotsHTML = s.images.map((_, i) =>
+      `<div class="dot${i === 0 ? ' active' : ''}" data-dot="${i}"></div>`
+    ).join('');
+
+    return `<div class="work-block">
+      <div class="work-block-label ${color}">${s.label}</div>
+      <div class="work-gallery card-carousel">
+        <div class="carousel-track-wrap">
+          <div class="carousel-track">${slidesHTML}</div>
+        </div>
+        <button class="carousel-arrow arrow-prev" aria-label="Previous image">&#8249;</button>
+        <button class="carousel-arrow arrow-next" aria-label="Next image">&#8250;</button>
+        <div class="carousel-dots">${dotsHTML}</div>
+        <div class="carousel-caption"><span class="caption-label">${s.images[0].caption}</span></div>
+      </div>
+    </div>`;
+  }
+
+  if (s.type === 'box') {
+    return `<div class="work-sidebar-box ${color}">
+      <div class="work-sidebar-box-label">${s.label}</div>
+      <div class="work-sidebar-box-content">${s.items.map(formatInline).join('<br>')}</div>
+    </div>`;
+  }
+
+  const paras = s.paragraphs.map(p => `<p class="work-block-text">${formatInline(p)}</p>`).join('');
+  const inner = s.type === 'outcome' ? `<div class="work-outcome-box">${paras}</div>` : paras;
+  return `<div class="work-block">
+    <div class="work-block-label ${color}">${s.label}</div>
+    ${inner}
+  </div>`;
+}
+
+
+// ── Gallery carousel wiring (generalized — works for any gallery,
+//    not just a fixed Wall-page set) ─────────────────────────
+function initGalleryCarousel(container, images) {
+  const track   = container.querySelector('.carousel-track');
+  const dots    = container.querySelectorAll('.dot');
+  const caption = container.querySelector('.caption-label');
+  const prev    = container.querySelector('.arrow-prev');
+  const next    = container.querySelector('.arrow-next');
+  let idx = 0;
+
+  function goTo(to) {
+    idx = Math.max(0, Math.min(to, images.length - 1));
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    caption.textContent = images[idx].caption;
+    prev.classList.toggle('dimmed', idx === 0);
+    next.classList.toggle('dimmed', idx === images.length - 1);
+  }
+
+  prev.addEventListener('click', e => { e.stopPropagation(); goTo(idx - 1); });
+  next.addEventListener('click', e => { e.stopPropagation(); goTo(idx + 1); });
+  dots.forEach(d => d.addEventListener('click', e => {
+    e.stopPropagation();
+    goTo(Number(d.dataset.dot));
+  }));
+
+  let touchStartX = null;
+  const wrap = container.querySelector('.carousel-track-wrap');
+  wrap.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  wrap.addEventListener('touchend', e => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? idx + 1 : idx - 1);
+    touchStartX = null;
+  });
+
+  goTo(0);
 }
 
 
@@ -149,11 +305,26 @@ function buildWorkList() {
   if (bar) wireFilterBar(bar);
 }
 
-function buildWorkDetail(id) {
+async function buildWorkDetail(id) {
   const p = workProjects.find(proj => proj.id === id);
   if (!p || !workDetailContent) return;
 
   const color = categoryColor(p.category);
+
+  let sections = [];
+  try {
+    const res = await fetch(p.contentFile);
+    sections = parseContentFile(await res.text());
+  } catch (err) {
+    console.error(`Could not load ${p.contentFile}`, err);
+    // Same file:// caveat as loadWorkData() — needs a local server.
+  }
+
+  const mainSections    = sections.filter(s => s.type !== 'box');
+  const sidebarSections = sections.filter(s => s.type === 'box');
+
+  const mainHTML    = mainSections.map(s => renderSection(s, color)).join('');
+  const sidebarHTML = sidebarSections.map(s => renderSection(s, color)).join('');
 
   workDetailContent.innerHTML = `
     <div class="work-detail-header ${color}">
@@ -162,32 +333,24 @@ function buildWorkDetail(id) {
       <div class="work-detail-tags">${renderTags(p.tags, color)}</div>
     </div>
     <hr class="work-detail-divider">
-    <div class="work-detail-body">
-      ${p.sections.map(s => {
-        if (s.type === 'outcome') {
-          return `<div class="work-block">
-            <div class="work-block-label ${color}">${s.label}</div>
-            <div class="work-outcome-box"><p>${s.content}</p></div>
-          </div>`;
-        }
-        let html = `<div class="work-block">
-          <div class="work-block-label ${color}">${s.label}</div>
-          <p class="work-block-text">${s.content}</p>`;
-        if (s.code) {
-          html += `<div class="code-block">
-            <div class="code-label">${s.code.label}</div>
-            <pre><code>${s.code.body.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre>
-          </div>`;
-        }
-        html += `</div>`;
-        return html;
-      }).join('')}
-      <div class="work-detail-links">
-        ${(p.links || []).map(l =>
-          `<a href="${l.href}" class="work-link${l.primary ? ' work-link--primary' : ''}" target="_blank" rel="noopener">${l.label}</a>`
-        ).join('')}
+    <div class="work-detail-layout">
+      <div class="work-detail-body">
+        ${mainHTML}
+        <div class="work-detail-links">
+          ${(p.links || []).map(l =>
+            `<a href="${l.href}" class="work-link${l.primary ? ' work-link--primary' : ''}" target="_blank" rel="noopener">${l.label}</a>`
+          ).join('')}
+        </div>
       </div>
+      ${sidebarHTML ? `<aside class="work-detail-sidebar">${sidebarHTML}</aside>` : ''}
     </div>`;
+
+  // Wire up any galleries that just got rendered
+  workDetailContent.querySelectorAll('.work-gallery').forEach((el, i) => {
+    const gallerySections = mainSections.filter(s => s.type === 'gallery');
+    const section = gallerySections[i];
+    if (section) initGalleryCarousel(el, section.images);
+  });
 
   workListSection.style.display   = 'none';
   workDetailSection.style.display = 'block';

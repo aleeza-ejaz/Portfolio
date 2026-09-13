@@ -1,0 +1,41 @@
+## Overview
+Portfolios are meant to convey a designer's voice. 
+
+
+As a perfected body of work, they stand to document the thoughts and experiments that led to a finished product. In this way, they act as an extension of the artist.
+
+
+In the Spring semester of 2026, I took a Web Design course offered by my university. We were taught the fundamentals of front-end development, along with the importance of establishing an online brand for creatives in this day and age. Before applying to internships, I challenged myself to put together portfolio website to serve as my platform on the internet.
+
+## The Challenge
+Designing and building a website that would best convey: "Hi, I'm Aleeza, and this is what I do." 
+
+## Tech Stack {box}
++ **HTML5**:  structure, bringing in my voice
++ **CSS3**: stylization, sharing my vision 
++ **JS**: automation, building the details
+
+## Details {box}
+**18-year-old me inspired this project the most.**
+In my senior year of high school, I joined the Yearbook club and got really involved in book's the design process. I ended up illustrating the cover, designing various original tailpieces, and having my art bring together the final aesthetic of the book. I reused some of the ideas I sketched from back then to inspire the color palette and animations you see on the home page, and the rest was designed from there.
+
+## Other Resources Used {box}
++ **Figma**:  early design ideation
++ **Claude**:  sitemap & JS 
++ **Google Gemini**:  portfolio research  
++ **W3Schools**: css revision 
+ 
+
+
+## Design Process {gallery}
+media/design/portfolio-wireframe.png | Early wireframe sketches
+media/design/portfolio-system.png | Design system and color tokens
+media/design/portfolio-final.png | Final homepage
+
+## What I Learned
+Working without a framework forced me to deeply understand **CSS layout fundamentals** — especially how stacking contexts, `position: sticky`, and `clamp()` interact.
+
+I also hit cross-browser issues with `backdrop-filter` that taught me to test on Safari early.
+
+## Outcome {outcome}
+A fully responsive, accessible portfolio site with custom animations, zero dependencies, and a clear design system — built and shipped for my 2026 job search.

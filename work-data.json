@@ -3,33 +3,11 @@
     {
       "id": "portfolio",
       "category": "Planet",
-      "type": "Web Development· UI/UX Design",
+      "type": "Web Development · UI/UX Design",
       "title": "Portfolio Website",
       "description": "An archive of my work brought online.",
       "tags": ["HTML", "CSS", "JavaScript", "2026"],
-      "sections": [
-        {
-          "label": "Overview",
-          "content": "Portfolios are meant to convey a designer's voice. As a perfected body of work, they stand to deliver thoughts, experiments, finished products, and the processes that led to them. In this way, they act as an extension of the artist.\n<br><br>In my Spring 2026 semester, I took a Web Design course offered by my university. We were taught the fundamentals of front-end development, along with the importance of establishing an online brand for creatives in this day and age. This portfolio website serves as my platform to share my work."
-        },
-        {
-          "label": "The Challenge",
-          "content": "How could I convey, 'Hi, I'm Aleeza, and this is what I do' through an website that reflects my approach to design?"
-        },
-        {
-          "label": "The Details",
-          "content": "Tech Stack \n~> HTML5: Structure, original artwork, text\n~> CSS3: Stylization, including set color pallettes, typography, and overall aesthetic"
-        },
-        {
-          "label": "What I Learned",
-          "content": "Working without a framework forced me to deeply understand <strong>CSS layout fundamentals</strong> — especially how stacking contexts, <code>position: sticky</code>, and <code>clamp()</code> interact. I also hit cross-browser issues with <code>backdrop-filter</code> that taught me to test on Safari early."
-        },
-        {
-          "label": "Outcome",
-          "type": "outcome",
-          "content": "A fully responsive, accessible portfolio site with custom animations, zero dependencies, and a clear design system — built and shipped for my 2026 job search."
-        }
-      ],
+      "contentFile": "work-content/portfolio.txt",
       "links": [
         { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" },
         { "label": "Live Site ↗", "primary": false, "href": "#" }
@@ -42,29 +20,7 @@
       "title": "Data Analysis Project",
       "description": "Exploratory data analysis and visualization for a class research project.",
       "tags": ["Python", "Pandas", "Matplotlib", "2025"],
-      "sections": [
-        {
-          "label": "Overview",
-          "content": "A class project exploring a real-world dataset using Python. The goal was to move from raw CSV data to <strong>clear, communicable findings</strong> through cleaning, analysis, and visualization."
-        },
-        {
-          "label": "Approach",
-          "content": "Used Pandas for data cleaning and aggregation, then Matplotlib for charting. Prioritised readability over complexity — the audience was classmates, not data scientists."
-        },
-        {
-          "label": "Key Code",
-          "content": "Loading and summarising the dataset:",
-          "code": {
-            "label": "analysis.py",
-            "body": "import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('data.csv')\ndf.dropna(inplace=True)\n\nsummary = df.groupby('category')['value'].mean()\nsummary.plot(kind='bar', color='#8d79ff')\nplt.tight_layout()\nplt.savefig('output.png', dpi=150)"
-          }
-        },
-        {
-          "label": "Outcome",
-          "type": "outcome",
-          "content": "A clean analysis with three data visualizations and a written interpretation. Submitted as part of a research methods course."
-        }
-      ],
+      "contentFile": "content/dataanalysis.txt",
       "links": [
         { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" }
       ]
@@ -76,21 +32,7 @@
       "title": "Resource Central — UX Report",
       "description": "Full UX research write-up: user testing, wireframes, and findings.",
       "tags": ["UX Research", "Figma", "PDF", "2025"],
-      "sections": [
-        {
-          "label": "Overview",
-          "content": "A full UX research write-up documenting the end-to-end design process for Resource Central — from initial user interviews through to final prototype and usability test results."
-        },
-        {
-          "label": "Contents",
-          "content": "The report covers: <strong>research methodology</strong>, interview transcripts and affinity mapping, information architecture decisions, wireframe progression (low to high fidelity), usability test protocol and findings, and final design rationale."
-        },
-        {
-          "label": "Outcome",
-          "type": "outcome",
-          "content": "A 24-page documented research process that can stand alone as a portfolio artifact or be shared with employers as evidence of UX process thinking."
-        }
-      ],
+      "contentFile": "content/uxreport.txt",
       "links": [
         { "label": "Download PDF ↗", "primary": true, "href": "#" }
       ]
@@ -102,25 +44,7 @@
       "title": "Java Class Project",
       "description": "Object-oriented application built for an intro to programming course.",
       "tags": ["Java", "OOP", "GitHub", "2024"],
-      "sections": [
-        {
-          "label": "Overview",
-          "content": "An object-oriented Java application built for an intro to programming course. The project modelled a simple inventory system using core OOP principles: <strong>encapsulation, inheritance, and polymorphism</strong>."
-        },
-        {
-          "label": "Structure",
-          "content": "The application used a three-layer class hierarchy with a base <code>Item</code> class, extended by <code>PhysicalItem</code> and <code>DigitalItem</code>, each overriding a shared <code>display()</code> method.",
-          "code": {
-            "label": "Item.java",
-            "body": "public class Item {\n  private String name;\n  private double price;\n\n  public Item(String name, double price) {\n    this.name  = name;\n    this.price = price;\n  }\n\n  public void display() {\n    System.out.println(name + \" — $\" + price);\n  }\n}"
-          }
-        },
-        {
-          "label": "Outcome",
-          "type": "outcome",
-          "content": "A working inventory management CLI application demonstrating foundational OOP concepts. Submitted with full Javadoc documentation."
-        }
-      ],
+      "contentFile": "content/javaproject.txt",
       "links": [
         { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" }
       ]

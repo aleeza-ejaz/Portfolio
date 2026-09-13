@@ -1,0 +1,19 @@
+How to structure content.txt files: 
+
+## Label — plain text section (default)
+## Label {box} — becomes a sidebar box; one line per item inside
+## Label {outcome} — becomes the highlighted wrap-up box
+## Label {gallery} — becomes a swipeable image carousel; format each line as path | caption
+## Label {image} — a single embedded photo with an optional caption, same path | caption format
+
+Inline formatting inside any paragraph:
+
+**bold text** → bold
+`code text` → code style
+
+**HTML5**:  
+structure, original artwork, bringing in my voice
+**CSS3**: 
+stylization, color palette, typography, sharing my vision 
+**JS**: 
+automation, consistancy in aesthetic, building the details

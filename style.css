@@ -896,6 +896,107 @@ nav {
   border-color: var(--black);
 }
 .work-link--primary:hover { background: #1a0050; border-color: var(--purple); color: var(--white); }
+/* ============================================================
+   WORK DETAIL — SIDEBAR BOXES + IMAGE / GALLERY SECTIONS
+   Additions for content parsed from per-project .txt files.
+   ============================================================ */
+
+/* ── Two-column layout: main write-up + sidebar boxes ───────
+   Falls back to a single column automatically when there is
+   no sidebar content (sidebarHTML is empty in script.js).
+──────────────────────────────────────────────────────────────── */
+.work-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media (min-width: 820px) {
+  .work-detail-layout {
+    grid-template-columns: 3fr 1.5fr;
+    align-items: start;
+    gap: 1rem;
+  }
+  .work-detail-sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + 1.5rem);
+  }
+}
+
+.work-detail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Sidebar box — horizontal rectangle, same black-to-category
+   gradient as the detail page header. Label color and border
+   stay tinted per category so the box still reads as belonging
+   to that project. ────────────────────────────────────────────
+──────────────────────────────────────────────────────────────── */
+.work-sidebar-box {
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2.5rem 2.5rem;
+  margin: 2rem 2rem 0.5rem 2rem;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  border: 1px solid rgb(from var(--purple) r g b / 0.4);
+  background: var(--purple-gradient);
+}
+
+.work-sidebar-box-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.work-sidebar-box-content {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.work-sidebar-box.blue   { border-color: rgb(from var(--blue) r g b / 0.4);   background: var(--blue-gradient); }
+.work-sidebar-box.blue   .work-sidebar-box-label { color: var(--blue); }
+.work-sidebar-box.orange { border-color: rgb(from var(--orange) r g b / 0.4); background: var(--orange-gradient); }
+.work-sidebar-box.orange .work-sidebar-box-label { color: var(--orange); }
+.work-sidebar-box.pink   { border-color: rgb(from var(--pink) r g b / 0.4);   background: var(--pink-gradient); }
+.work-sidebar-box.pink   .work-sidebar-box-label { color: var(--pink); }
+.work-sidebar-box.purple { border-color: rgb(from var(--purple) r g b / 0.4); background: var(--purple-gradient); }
+.work-sidebar-box.purple .work-sidebar-box-label { color: var(--purple); }
+
+/* ── Single embedded image ({image} sections) ────────────── */
+.work-single-image { margin-top: 0.5rem; }
+.work-single-image img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+.work-single-image figcaption {
+  font-size: 0.8rem;
+  color: rgba(0,0,0,0.45);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ── Image gallery ({gallery} sections) — reuses the same
+   carousel classes and behavior as the Wall page cards, just
+   sized for a full-width block inside the detail write-up
+   instead of a fixed-height card shell ────────────────────── */
+.work-gallery {
+  height: 340px;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .work-gallery { height: 220px; }
+}
 
 /* -- Footer --*/
 
@@ -1011,4 +1112,3 @@ footer {
   .art-masonry { columns: 1; }
   .cloud-detail { border-radius: var(--radius-md); }
 }
-
