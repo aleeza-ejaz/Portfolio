@@ -118,7 +118,8 @@ function escapeHtml(str) {
 function formatInline(text) {
   return escapeHtml(text)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/`(.+?)`/g, '<code>$1</code>');
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
 }
 
 function parseContentFile(text) {

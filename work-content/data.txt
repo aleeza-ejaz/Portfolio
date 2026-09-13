@@ -1,11 +1,21 @@
 ## Overview
-Portfolios are meant to convey a designer's voice. 
+This semester, I completed the 25-Hour Certificate Program through New York Tech's Entrepreneurship and Technology Innovation Center [ETIC](https://www.nyit.edu/academics/engineering-and-computing-sciences/etic/), where I worked on a project exploring how AI could make large, unstructured datasets more accessible through visualization.
 
+Most AI tools can only process so much at once. With token limits, pasting 10,000+ rows into a chat window just isn’t feasible. So, instead of treating every dataset as a completely unique problem, I explored a different direction: creating a universal structure that AI could reliably map information into.
 
-As a perfected body of work, they stand to document the thoughts and experiments that led to a finished product. In this way, they act as an extension of the artist.
+After 26 drafts, I developed a workflow using a locally-run Mistral AI agent and a 22-column universal schema to standardize almost any CSV or Excel dataset into a consistent format. The schema mattered because of abstraction: once data fit into a shared structure, the system no longer needed to know where it came from. That made visualization generation faster, more flexible, and far easier to scale — shifting the focus from rebuilding dashboards for every dataset to improving interaction, readability, and accessibility. 
 
+I tested it on the NYC Open Data Air Quality & Health Impacts dataset. Taking 18,900 rows across 12 categories, the script completed Phase 1 (schema discovery) in 17.35 seconds, and Phase 2 (row extraction and full output generation) in 11.93 seconds. Three ready-to-use files, under 30 seconds total. 
 
-In the Spring semester of 2026, I took a Web Design course offered by my university. We were taught the fundamentals of front-end development, along with the importance of establishing an online brand for creatives in this day and age. Before applying to internships, I challenged myself to put together portfolio website to serve as my platform on the internet.
+Visualization tools have the potential to completely change how people engage with information, especially when dealing with large or overwhelming datasets. Making data easier to explore means making it easier to understand, question, and use.
+
+This project pushed me further toward the kind of work I want to continue exploring: combining computer science, design, and emerging AI tools to build systems that make technology feel more intuitive and accessible.
+
+Huge thanks to the ETIC program for the opportunity to experiment with something at the intersection of AI, visualization, and interaction design. 
+
+I’ve attached the Air Quality & Health Impacts HTML dashboard and formatted workbook below. Take a look, and let me know what you think!
+
+#NYIT #ETIC #AI #DataVisualization #InteractionDesign #Python #OpenData #MachineLearning
 
 ## The Challenge
 Designing and building a website that would best convey: "Hi, I'm Aleeza, and this is what I do." 
@@ -32,8 +42,13 @@ media/design/portfolio-wireframe.png | Early wireframe sketches
 media/design/portfolio-system.png | Design system and color tokens
 media/design/portfolio-final.png | Final homepage
 
-## What I Learned
-Working without a framework forced me to deeply understand **CSS layout fundamentals** — especially how stacking contexts, `position: sticky`, and `clamp()` interact.
+## Details
+The tool runs in two modes: AI-assisted for messy or unfamiliar data, and a faster rule-based mode for clean datasets. All processing happens locally, so no data ever leaves your machine.
+
+From a single terminal command, the script can generate:
+A cleaned and standardized CSV
+A formatted Excel workbook with organized summaries and documentation
+A fully interactive HTML visualization dashboard with charts, customization, zooming, exports, and offline functionality
 
 I also hit cross-browser issues with `backdrop-filter` that taught me to test on Safari early.
 

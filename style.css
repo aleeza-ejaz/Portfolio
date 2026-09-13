@@ -999,6 +999,21 @@ nav {
   .work-gallery { height: 220px; }
 }
 
+/* ── Inline links within .txt content — [label](url) syntax.
+   Scoped to rendered content only; global `a` reset elsewhere
+   on the site is untouched. ─────────────────────────────────
+──────────────────────────────────────────────────────────────── */
+.work-block-text a,
+.work-sidebar-box-content a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s;
+}
+.work-block-text a { color: var(--purple); }
+.work-sidebar-box-content a { color: var(--white); }
+.work-block-text a:hover,
+.work-sidebar-box-content a:hover { opacity: 0.7; }
+
 /* -- Footer --*/
 
 footer {

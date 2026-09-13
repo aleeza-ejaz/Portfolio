@@ -8,8 +8,9 @@ How to structure content.txt files:
 
 Inline formatting inside any paragraph:
 
-**bold text** → bold
-`code text` → code style
+**bold text** -> bold
+`code text` -> code style
+[link text](url) -> link
 
 **HTML5**:  
 structure, original artwork, bringing in my voice
