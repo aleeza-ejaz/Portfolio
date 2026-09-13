@@ -20,7 +20,7 @@
       "title": "Data Analysis Project",
       "description": "Exploratory data analysis and visualization for a class research project.",
       "tags": ["Python", "Pandas", "Matplotlib", "2025"],
-      "contentFile": "content/dataanalysis.txt",
+      "contentFile": "work-content/data.txt",
       "links": [
         { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" }
       ]
@@ -32,16 +32,16 @@
       "title": "Resource Central — UX Report",
       "description": "Full UX research write-up: user testing, wireframes, and findings.",
       "tags": ["UX Research", "Figma", "PDF", "2025"],
-      "contentFile": "content/uxreport.txt",
+      "contentFile": "work-content/resource-central.txt",
       "links": [
         { "label": "Download PDF ↗", "primary": true, "href": "#" }
       ]
     },
     {
-      "id": "javaproject",
-      "category": "Cloud",
+      "id": "andria",
+      "category": "Planet",
       "type": "Java · OOP",
-      "title": "Java Class Project",
+      "title": "Worldbuilding Project",
       "description": "Object-oriented application built for an intro to programming course.",
       "tags": ["Java", "OOP", "GitHub", "2024"],
       "contentFile": "content/javaproject.txt",
