@@ -1,6 +1,8 @@
 ## Overview
 This semester, I completed the 25-Hour Certificate Program through New York Tech's Entrepreneurship and Technology Innovation Center [ETIC](https://www.nyit.edu/academics/engineering-and-computing-sciences/etic/), where I worked on a project exploring how AI could make large, unstructured datasets more accessible through visualization.
 
+
+
 Most AI tools can only process so much at once. With token limits, pasting 10,000+ rows into a chat window just isn’t feasible. So, instead of treating every dataset as a completely unique problem, I explored a different direction: creating a universal structure that AI could reliably map information into.
 
 After 26 drafts, I developed a workflow using a locally-run Mistral AI agent and a 22-column universal schema to standardize almost any CSV or Excel dataset into a consistent format. The schema mattered because of abstraction: once data fit into a shared structure, the system no longer needed to know where it came from. That made visualization generation faster, more flexible, and far easier to scale — shifting the focus from rebuilding dashboards for every dataset to improving interaction, readability, and accessibility. 
