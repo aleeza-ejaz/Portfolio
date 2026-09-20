@@ -863,7 +863,9 @@ nav {
   font-size: 0.95rem;
   color: rgba(0,0,0,0.6);
   line-height: 1.85;
+  margin-bottom: 1rem;
 }
+.work-block-text:last-child { margin-bottom: 0; }
 
 .work-outcome-box {
   background: rgba(141,121,255,0.06);
@@ -875,7 +877,9 @@ nav {
   font-size: 0.95rem;
   color: rgba(0,0,0,0.6);
   line-height: 1.8;
+  margin-bottom: 1rem;
 }
+.work-outcome-box p:last-child { margin-bottom: 0; }
 
 .work-detail-links { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 0.5rem; }
 
@@ -985,18 +989,230 @@ nav {
   font-style: italic;
 }
 
-/* ── Image gallery ({gallery} sections) — reuses the same
-   carousel classes and behavior as the Wall page cards, just
-   sized for a full-width block inside the detail write-up
-   instead of a fixed-height card shell ────────────────────── */
-.work-gallery {
-  height: 340px;
+/* ── Image gallery ({gallery} sections) — carousel shell, track,
+   slides, arrows, dots, and caption. Sized for a full-width block
+   inside the detail write-up rather than a fixed-height card. ──
+──────────────────────────────────────────────────────────────── */
+.card-carousel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   border-radius: 12px;
+  overflow: hidden;
+  background: #080808;
+}
+
+.work-gallery {
+  height: 460px;
   margin-top: 0.5rem;
 }
 
 @media (max-width: 600px) {
-  .work-gallery { height: 220px; }
+  .work-gallery { height: 320px; }
+}
+
+/* ── Image area — holds the sliding track, arrows, and dots.
+   Takes all remaining height above the fixed caption bar. ──── */
+.carousel-image-area {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.carousel-track-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.carousel-slide-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Caption bar — solid black, sits below the image, holds the
+   prev/next arrows on either side of the caption text. Arrows
+   live here now instead of overlaying the image, so they're
+   always visible (no hover needed — works on touch too). ───── */
+.carousel-caption-bar {
+  flex-shrink: 0;
+  background: var(--black);
+  padding: 10px 14px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.caption-label {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Arrows — static buttons in the caption bar, tinted to the
+   project's category color, white outline/icon. ────────────── */
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--purple);
+  border: 1.5px solid var(--white);
+  color: var(--white);
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: var(--cursor);
+  transition: filter 0.2s, transform 0.15s, opacity 0.2s;
+}
+
+.carousel-arrow:hover { filter: brightness(0.85); }
+.carousel-arrow:active { transform: scale(0.92); }
+
+.carousel-arrow.dimmed {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.card-carousel.blue   .carousel-arrow { background: var(--blue); }
+.card-carousel.orange .carousel-arrow { background: var(--orange); }
+.card-carousel.pink   .carousel-arrow { background: var(--pink); }
+.card-carousel.purple .carousel-arrow { background: var(--purple); }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 13px;
+  right: 14px;
+  display: flex;
+  gap: 5px;
+  z-index: 4;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  transition: background 0.25s, width 0.25s, border-radius 0.25s;
+  cursor: var(--cursor);
+}
+
+.dot.active { background: #fff; width: 14px; border-radius: var(--radius-pill); }
+
+.card-carousel.blue   .dot.active { background: var(--blue); }
+.card-carousel.orange .dot.active { background: var(--orange); }
+.card-carousel.pink   .dot.active { background: var(--pink); }
+.card-carousel.purple .dot.active { background: var(--purple); }
+
+/* ── Fullscreen image lightbox — opened by tapping/clicking a
+   gallery image. One shared overlay element, reused across
+   every gallery on the page. ────────────────────────────────
+──────────────────────────────────────────────────────────────── */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.92);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.lightbox-overlay.active { display: flex; }
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--white);
+  font-size: 22px;
+  cursor: var(--cursor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
+
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--purple);
+  border: 1.5px solid var(--white);
+  color: var(--white);
+  font-size: 22px;
+  cursor: var(--cursor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.2s;
+}
+.lightbox-arrow:hover { filter: brightness(0.85); }
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+.lightbox-overlay.blue   .lightbox-arrow { background: var(--blue); }
+.lightbox-overlay.orange .lightbox-arrow { background: var(--orange); }
+.lightbox-overlay.pink   .lightbox-arrow { background: var(--pink); }
+.lightbox-overlay.purple .lightbox-arrow { background: var(--purple); }
+
+@media (max-width: 600px) {
+  .lightbox-arrow { width: 36px; height: 36px; font-size: 18px; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+  .lightbox-close { top: 12px; right: 12px; }
 }
 
 /* ── Inline links within .txt content — [label](url) syntax.

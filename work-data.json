@@ -9,8 +9,7 @@
       "tags": ["HTML", "CSS", "JavaScript", "2026"],
       "contentFile": "work-content/portfolio.txt",
       "links": [
-        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" },
-        { "label": "Live Site ↗", "primary": false, "href": "#" }
+        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleeza-ejaz/Portfolio" }
       ]
     },
     {

@@ -187,14 +187,18 @@ function renderSection(s, color) {
 
     return `<div class="work-block">
       <div class="work-block-label ${color}">${s.label}</div>
-      <div class="work-gallery card-carousel">
-        <div class="carousel-track-wrap">
-          <div class="carousel-track">${slidesHTML}</div>
+      <div class="work-gallery card-carousel ${color}">
+        <div class="carousel-image-area">
+          <div class="carousel-track-wrap">
+            <div class="carousel-track">${slidesHTML}</div>
+          </div>
+          <div class="carousel-dots">${dotsHTML}</div>
         </div>
-        <button class="carousel-arrow arrow-prev" aria-label="Previous image">&#8249;</button>
-        <button class="carousel-arrow arrow-next" aria-label="Next image">&#8250;</button>
-        <div class="carousel-dots">${dotsHTML}</div>
-        <div class="carousel-caption"><span class="caption-label">${s.images[0].caption}</span></div>
+        <div class="carousel-caption-bar">
+          <button class="carousel-arrow arrow-prev" aria-label="Previous image">&#8249;</button>
+          <span class="caption-label">${s.images[0].caption}</span>
+          <button class="carousel-arrow arrow-next" aria-label="Next image">&#8250;</button>
+        </div>
       </div>
     </div>`;
   }
@@ -217,13 +221,15 @@ function renderSection(s, color) {
 
 // ── Gallery carousel wiring (generalized — works for any gallery,
 //    not just a fixed Wall-page set) ─────────────────────────
-function initGalleryCarousel(container, images) {
+function initGalleryCarousel(container, images, color) {
   const track   = container.querySelector('.carousel-track');
   const dots    = container.querySelectorAll('.dot');
   const caption = container.querySelector('.caption-label');
   const prev    = container.querySelector('.arrow-prev');
   const next    = container.querySelector('.arrow-next');
+  const wrap    = container.querySelector('.carousel-track-wrap');
   let idx = 0;
+  let didSwipe = false; // distinguishes a drag from a tap, so a swipe doesn't also open the lightbox
 
   function goTo(to) {
     idx = Math.max(0, Math.min(to, images.length - 1));
@@ -242,18 +248,104 @@ function initGalleryCarousel(container, images) {
   }));
 
   let touchStartX = null;
-  const wrap = container.querySelector('.carousel-track-wrap');
   wrap.addEventListener('touchstart', e => {
     touchStartX = e.touches[0].clientX;
+    didSwipe = false;
   }, { passive: true });
   wrap.addEventListener('touchend', e => {
     if (touchStartX === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 40) goTo(dx < 0 ? idx + 1 : idx - 1);
+    if (Math.abs(dx) > 40) {
+      goTo(dx < 0 ? idx + 1 : idx - 1);
+      didSwipe = true;
+    }
     touchStartX = null;
   });
 
+  // Tap/click the image to open it fullscreen — skipped if that tap
+  // was actually a swipe that just changed slides.
+  wrap.addEventListener('click', () => {
+    if (didSwipe) { didSwipe = false; return; }
+    openLightbox(images, idx, color);
+  });
+
   goTo(0);
+}
+
+
+// ── Fullscreen image lightbox ────────────────────────────────
+// One shared overlay, reused for whichever gallery opened it.
+let lightboxImages = [];
+let lightboxIndex  = 0;
+
+function ensureLightbox() {
+  if (document.getElementById('image-lightbox')) return;
+
+  const lightbox = document.createElement('div');
+  lightbox.id = 'image-lightbox';
+  lightbox.className = 'lightbox-overlay';
+  lightbox.innerHTML = `
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-arrow lightbox-prev" aria-label="Previous image">&#8249;</button>
+    <img class="lightbox-image" src="" alt="">
+    <button class="lightbox-arrow lightbox-next" aria-label="Next image">&#8250;</button>
+    <div class="lightbox-caption"></div>
+  `;
+  document.body.appendChild(lightbox);
+
+  const imgEl     = lightbox.querySelector('.lightbox-image');
+  const captionEl = lightbox.querySelector('.lightbox-caption');
+
+  function render() {
+    const img = lightboxImages[lightboxIndex];
+    imgEl.src = img.src;
+    imgEl.alt = img.caption || '';
+    captionEl.textContent = img.caption || '';
+  }
+
+  function show(delta) {
+    lightboxIndex = (lightboxIndex + delta + lightboxImages.length) % lightboxImages.length;
+    render();
+  }
+
+  function close() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  lightbox.querySelector('.lightbox-close').addEventListener('click', close);
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', () => show(-1));
+  lightbox.querySelector('.lightbox-next').addEventListener('click', () => show(1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape')    close();
+    if (e.key === 'ArrowLeft') show(-1);
+    if (e.key === 'ArrowRight') show(1);
+  });
+
+  let touchStartX = null;
+  lightbox.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', e => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) show(dx < 0 ? 1 : -1);
+    touchStartX = null;
+  });
+
+  lightbox._render = render;
+}
+
+function openLightbox(images, startIndex, color) {
+  ensureLightbox();
+  lightboxImages = images;
+  lightboxIndex  = startIndex;
+  const lightbox = document.getElementById('image-lightbox');
+  lightbox.className = `lightbox-overlay active ${color || ''}`.trim();
+  lightbox._render();
+  document.body.style.overflow = 'hidden';
 }
 
 
@@ -350,7 +442,7 @@ async function buildWorkDetail(id) {
   workDetailContent.querySelectorAll('.work-gallery').forEach((el, i) => {
     const gallerySections = mainSections.filter(s => s.type === 'gallery');
     const section = gallerySections[i];
-    if (section) initGalleryCarousel(el, section.images);
+    if (section) initGalleryCarousel(el, section.images, color);
   });
 
   workListSection.style.display   = 'none';
