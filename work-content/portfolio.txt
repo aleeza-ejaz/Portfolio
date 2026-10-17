@@ -13,7 +13,7 @@ Designing and building a website that would best convey: "Hi, I'm Aleeza, and th
 ## Tech Stack {box}
 + **HTML5**:  structure, bringing in my voice
 + **CSS3**: stylization, sharing my vision 
-+ **JS**: automation, building the details
++ **JS**: automation, building the details 
 
 ## Details {box}
 **18-year-old me inspired this project the most.**

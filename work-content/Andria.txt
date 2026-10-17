@@ -1,41 +1,43 @@
 ## Overview
-Portfolios are meant to convey a designer's voice. 
+The focus of my Digital Tools course was to give an introduction to creative software and learn to develop story-telling skills through ideation. 
+Over the course of the semester, we chose a chapter from Italo Calvino's _Invisible Cities_. 
 
-
-As a perfected body of work, they stand to document the thoughts and experiments that led to a finished product. In this way, they act as an extension of the artist.
-
-
-In the Spring semester of 2026, I took a Web Design course offered by my university. We were taught the fundamentals of front-end development, along with the importance of establishing an online brand for creatives in this day and age. Before applying to internships, I challenged myself to put together portfolio website to serve as my platform on the internet.
 
 ## The Challenge
-Designing and building a website that would best convey: "Hi, I'm Aleeza, and this is what I do." 
+Designing an AI-powered universal schema structure that could standardize poorly structured datasets and deliver useful findings with customizable charts in one command.
 
-## Tech Stack {box}
-+ **HTML5**:  structure, bringing in my voice
-+ **CSS3**: stylization, sharing my vision 
-+ **JS**: automation, building the details
+## Tech Stack {box table}
+**Language**:   Python
+**AI / LLM**:   Mistral (open source), run locally through Ollama
+**Data input**:     CSV
+**Data output**:    Excel workbook (22-column schema + summary tab), failsafe CSV [confirm libraries, e.g. pandas, openpyxl]
+**Visualization**:  Plotly, HTML dashboard (bar, pie, line, cross-tabulation, heatmap)
+**Setup**:  requirements.txt, single terminal command
+**Development**:    AI-assisted development with Claude, 26 iterations
 
-## Details {box}
-**18-year-old me inspired this project the most.**
-In my senior year of high school, I joined the Yearbook club and got really involved in book's the design process. I ended up illustrating the cover, designing various original tailpieces, and having my art bring together the final aesthetic of the book. I reused some of the ideas I sketched from back then to inspire the color palette and animations you see on the home page, and the rest was designed from there.
+BACKGROUND 
+In the Spring of 2026, I reached out to the Entrepreneurship & Innovation Technology Center (ETIC) at New York Tech in hopes of getting involved with the NASA patent work they specialize in. Their prerequisite 25 Hour Certificate Program required completion of a major-aligned project to demonstrate your innovative ability and resourcefulness. 
 
-## Other Resources Used {box}
-+ **Figma**:  early design ideation
-+ **Claude**:  sitemap & JS 
-+ **Google Gemini**:  portfolio research  
-+ **W3Schools**: css revision 
- 
+At the same time, ETIC helped host the Whole Health Community Datathon with the NYC Civic Engagement Committee. Students worked in teams to analyze survey data collected from the five boroughs on the social determinants of health. The datasets came from the CEC's The People's Money participatory budgeting process and contained over 10,000 rows. Long survey answers often cluttered the cells, which made it hard to see relationships in the data.
 
+The datathon centered on analysis and visualization, so I built my 25 Hour Program submission around that same problem.
 
 ## Design Process {gallery}
 media/design/portfolio-wireframe.png | Early wireframe sketches
 media/design/portfolio-system.png | Design system and color tokens
 media/design/portfolio-final.png | Final homepage
 
-## What I Learned
-Working without a framework forced me to deeply understand **CSS layout fundamentals** — especially how stacking contexts, `position: sticky`, and `clamp()` interact.
+## Solution
+I directed the development of a Python script powered by a locally run, open-source LLM (Mistral, running through Ollama). It takes an input CSV and produces three outputs:
 
-I also hit cross-browser issues with `backdrop-filter` that taught me to test on Safari early.
+**1. An Excel workbook** -  The data is categorized into a 22-column universal schema. A summary tab reads the categorized data and shows counts of the different tags and the relationships found across the dataset.
+
+**2. An interactive HTML dashboard** -  Built from the workbook, it turns the generated summaries and pre-defined relationships into customizable visualizations: bar, pie, and line charts, plus cross-tabulations (such as category by location) that can also be displayed as a heatmap. Charts are powered by Plotly.
+
+**3. A failsafe CSV** -  An unmodified copy of the original data, kept so nothing is lost or altered during processing. [confirm this description]
+
+To run it, a user installs the packages listed in a requirements file [and pulls the Mistral model through Ollama], then runs a single command in the terminal.
+
 
 ## Outcome {outcome}
-A fully responsive, accessible portfolio site with custom animations, zero dependencies, and a clear design system — built and shipped for my 2026 job search.
+Completion of the 25 Hour Certificate Program, earning a certified microcredential from NYIT. This project also resulted in a job offer from ETIC, where I now work on multimedia prototyping and data visualizaton design. 

@@ -103,11 +103,13 @@ function renderTags(tags, color) {
 // ── Content file parser ──────────────────────────────────────
 // Turns a plain .txt file into an array of section objects. The only
 // syntax it understands:
-//   ## Label            -> starts a new section (plain text)
-//   ## Label {box}      -> sidebar box; one item per line
-//   ## Label {outcome}  -> highlighted outcome box
-//   ## Label {gallery}  -> image carousel; lines are "path | caption"
-//   ## Label {image}    -> single embedded image; "path | caption"
+//   ## Label             -> starts a new section (plain text)
+//   ## Label {box}       -> sidebar box; one item per line
+//   ## Label {box table} -> sidebar box; "Label: value" lines become a
+//                           borderless two-column grid instead of plain lines
+//   ## Label {outcome}   -> highlighted outcome box
+//   ## Label {gallery}   -> image carousel; lines are "path | caption"
+//   ## Label {image}     -> single embedded image; "path | caption"
 //   blank line          -> paragraph break, preserved exactly as typed
 //   **text**            -> bold
 //   `text`              -> inline code
@@ -128,10 +130,19 @@ function parseContentFile(text) {
   let current = null;
 
   lines.forEach(line => {
-    const header = line.match(/^##\s+(.+?)(?:\s*\{(\w+)\})?\s*$/);
+    // Brace content can now hold more than one word — e.g. "{box table}" —
+    // so the first word is the section type and any remaining words are
+    // modifiers (currently just "table").
+    const header = line.match(/^##\s+(.+?)(?:\s*\{([^}]+)\})?\s*$/);
     if (header) {
       if (current) sections.push(current);
-      current = { label: header[1].trim(), type: header[2] || null, raw: [] };
+      const tokens = header[2] ? header[2].trim().split(/\s+/) : [];
+      current = {
+        label: header[1].trim(),
+        type: tokens[0] || null,
+        table: tokens.includes('table'),
+        raw: [],
+      };
     } else if (current) {
       current.raw.push(line);
     }
@@ -149,9 +160,23 @@ function parseContentFile(text) {
       return { label: s.label, type: s.type, images };
     }
 
+    if (s.type === 'box' && s.table) {
+      // {box table} — "Label: value" lines become a borderless two-column grid.
+      const items = body.split('\n').map(l => l.trim()).filter(Boolean).map(rawLine => {
+        const line = rawLine.replace(/^[-+*]\s+/, ''); // strip an optional leading bullet marker
+        const colonIndex = line.indexOf(':');
+        if (colonIndex > -1) {
+          return { label: line.slice(0, colonIndex).trim(), value: line.slice(colonIndex + 1).trim() };
+        }
+        return { label: null, value: line };
+      });
+      return { label: s.label, type: 'box', table: true, items };
+    }
+
     if (s.type === 'box') {
+      // Plain {box} — original behavior: one line per item, no table parsing.
       const items = body.split('\n').map(l => l.trim()).filter(Boolean);
-      return { label: s.label, type: 'box', items };
+      return { label: s.label, type: 'box', table: false, items };
     }
 
     const paragraphs = body.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
@@ -200,6 +225,23 @@ function renderSection(s, color) {
           <button class="carousel-arrow arrow-next" aria-label="Next image">&#8250;</button>
         </div>
       </div>
+    </div>`;
+  }
+
+  if (s.type === 'box' && s.table) {
+    // Each label/value is its own grid cell (not wrapped in a per-row div),
+    // so every row shares one set of column tracks and lines up with every
+    // other row instead of each row sizing its own columns independently.
+    const cells = s.items.map(item => {
+      if (item.label) {
+        return `<span class="work-sidebar-table-label">${formatInline(item.label)}</span><span class="work-sidebar-table-value">${formatInline(item.value)}</span>`;
+      }
+      return `<span class="work-sidebar-table-full">${formatInline(item.value)}</span>`;
+    }).join('');
+
+    return `<div class="work-sidebar-box ${color}">
+      <div class="work-sidebar-box-label">${s.label}</div>
+      <div class="work-sidebar-box-content work-sidebar-box-content--table">${cells}</div>
     </div>`;
   }
 

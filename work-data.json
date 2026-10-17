@@ -15,10 +15,10 @@
     {
       "id": "dataanalysis",
       "category": "Cloud",
-      "type": "Python · Data",
+      "type": "Python · Data Visualization",
       "title": "Data Analysis Project",
-      "description": "Exploratory data analysis and visualization for a class research project.",
-      "tags": ["Python", "Pandas", "Matplotlib", "2025"],
+      "description": "22-collumn universal schema to automate the generation of data visualizations.",
+      "tags": ["Python", "Pandas", "Mistral AI", "2026"],
       "contentFile": "work-content/data.txt",
       "links": [
         { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" }
@@ -38,14 +38,15 @@
     },
     {
       "id": "andria",
-      "category": "Planet",
-      "type": "Java · OOP",
+      "category": "Wall",
+      "type": "Adobe Creative Cloud · Artificial Intelligence",
       "title": "Worldbuilding Project",
       "description": "Object-oriented application built for an intro to programming course.",
-      "tags": ["Java", "OOP", "GitHub", "2024"],
-      "contentFile": "content/javaproject.txt",
+      "tags": ["Photoshop", "Illustrator", "After Effects", "Gemini", "ChatGPT", "2025"],
+      "contentFile": "work-content/Andria.txt",
       "links": [
-        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" }
+        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleezaejaz" },
+        {"label": "View Portfolio ↗", "primary": true, "href": "media/design/designFinal_AE.pdf"}
       ]
     }
   ]

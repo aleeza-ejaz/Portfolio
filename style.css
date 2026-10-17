@@ -966,6 +966,37 @@ nav {
   color: var(--white);
 }
 
+/* ── {box table} only — "Label: value" lines parse into these.
+   One shared grid for the whole box (not one grid per row) so
+   every row's label column lines up with every other row's.
+   No borders or lines, just column alignment. ─────────────────
+──────────────────────────────────────────────────────────────── */
+.work-sidebar-box-content--table {
+  display: grid;
+  grid-template-columns: minmax(0, 40%) minmax(0, 1fr);
+  column-gap: 14px;
+  row-gap: 8px;
+  align-items: baseline;
+}
+
+.work-sidebar-table-label {
+  font-weight: 600;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.work-sidebar-table-value {
+  opacity: 0.85;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* A line with no colon spans the full width of the box instead
+   of sitting in either column. */
+.work-sidebar-table-full {
+  grid-column: 1 / -1;
+}
+
 .work-sidebar-box.blue   { border-color: rgb(from var(--blue) r g b / 0.4);   background: var(--blue-gradient); }
 .work-sidebar-box.blue   .work-sidebar-box-label { color: var(--blue); }
 .work-sidebar-box.orange { border-color: rgb(from var(--orange) r g b / 0.4); background: var(--orange-gradient); }

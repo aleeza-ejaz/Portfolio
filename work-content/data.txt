@@ -2,57 +2,41 @@
 This semester, I completed the 25-Hour Certificate Program through New York Tech's Entrepreneurship and Technology Innovation Center [ETIC](https://www.nyit.edu/academics/engineering-and-computing-sciences/etic/), where I worked on a project exploring how AI could make large, unstructured datasets more accessible through visualization.
 
 
-
-Most AI tools can only process so much at once. With token limits, pasting 10,000+ rows into a chat window just isn’t feasible. So, instead of treating every dataset as a completely unique problem, I explored a different direction: creating a universal structure that AI could reliably map information into.
-
-After 26 drafts, I developed a workflow using a locally-run Mistral AI agent and a 22-column universal schema to standardize almost any CSV or Excel dataset into a consistent format. The schema mattered because of abstraction: once data fit into a shared structure, the system no longer needed to know where it came from. That made visualization generation faster, more flexible, and far easier to scale — shifting the focus from rebuilding dashboards for every dataset to improving interaction, readability, and accessibility. 
-
-I tested it on the NYC Open Data Air Quality & Health Impacts dataset. Taking 18,900 rows across 12 categories, the script completed Phase 1 (schema discovery) in 17.35 seconds, and Phase 2 (row extraction and full output generation) in 11.93 seconds. Three ready-to-use files, under 30 seconds total. 
-
-Visualization tools have the potential to completely change how people engage with information, especially when dealing with large or overwhelming datasets. Making data easier to explore means making it easier to understand, question, and use.
-
-This project pushed me further toward the kind of work I want to continue exploring: combining computer science, design, and emerging AI tools to build systems that make technology feel more intuitive and accessible.
-
-Huge thanks to the ETIC program for the opportunity to experiment with something at the intersection of AI, visualization, and interaction design. 
-
-I’ve attached the Air Quality & Health Impacts HTML dashboard and formatted workbook below. Take a look, and let me know what you think!
-
-#NYIT #ETIC #AI #DataVisualization #InteractionDesign #Python #OpenData #MachineLearning
-
 ## The Challenge
-Designing and building a website that would best convey: "Hi, I'm Aleeza, and this is what I do." 
+Designing an AI-powered universal schema structure that could standardize poorly structured datasets and deliver useful findings with customizable charts in one command.
 
-## Tech Stack {box}
-+ **HTML5**:  structure, bringing in my voice
-+ **CSS3**: stylization, sharing my vision 
-+ **JS**: automation, building the details
+## Tech Stack {box table}
+**Language**:   Python
+**AI / LLM**:   Mistral (open source), run locally through Ollama
+**Data input**:     CSV
+**Data output**:    Excel workbook (22-column schema + summary tab), failsafe CSV [confirm libraries, e.g. pandas, openpyxl]
+**Visualization**:  Plotly, HTML dashboard (bar, pie, line, cross-tabulation, heatmap)
+**Setup**:  requirements.txt, single terminal command
+**Development**:    AI-assisted development with Claude, 26 iterations
 
-## Details {box}
-**18-year-old me inspired this project the most.**
-In my senior year of high school, I joined the Yearbook club and got really involved in book's the design process. I ended up illustrating the cover, designing various original tailpieces, and having my art bring together the final aesthetic of the book. I reused some of the ideas I sketched from back then to inspire the color palette and animations you see on the home page, and the rest was designed from there.
+BACKGROUND 
+In the Spring of 2026, I reached out to the Entrepreneurship & Innovation Technology Center (ETIC) at New York Tech in hopes of getting involved with the NASA patent work they specialize in. Their prerequisite 25 Hour Certificate Program required completion of a major-aligned project to demonstrate your innovative ability and resourcefulness. 
 
-## Other Resources Used {box}
-+ **Figma**:  early design ideation
-+ **Claude**:  sitemap & JS 
-+ **Google Gemini**:  portfolio research  
-+ **W3Schools**: css revision 
- 
+At the same time, ETIC helped host the Whole Health Community Datathon with the NYC Civic Engagement Committee. Students worked in teams to analyze survey data collected from the five boroughs on the social determinants of health. The datasets came from the CEC's The People's Money participatory budgeting process and contained over 10,000 rows. Long survey answers often cluttered the cells, which made it hard to see relationships in the data.
 
+The datathon centered on analysis and visualization, so I built my 25 Hour Program submission around that same problem.
 
 ## Design Process {gallery}
 media/design/portfolio-wireframe.png | Early wireframe sketches
 media/design/portfolio-system.png | Design system and color tokens
 media/design/portfolio-final.png | Final homepage
 
-## Details
-The tool runs in two modes: AI-assisted for messy or unfamiliar data, and a faster rule-based mode for clean datasets. All processing happens locally, so no data ever leaves your machine.
+## Solution
+I directed the development of a Python script powered by a locally run, open-source LLM (Mistral, running through Ollama). It takes an input CSV and produces three outputs:
 
-From a single terminal command, the script can generate:
-A cleaned and standardized CSV
-A formatted Excel workbook with organized summaries and documentation
-A fully interactive HTML visualization dashboard with charts, customization, zooming, exports, and offline functionality
+**1. An Excel workbook** -  The data is categorized into a 22-column universal schema. A summary tab reads the categorized data and shows counts of the different tags and the relationships found across the dataset.
 
-I also hit cross-browser issues with `backdrop-filter` that taught me to test on Safari early.
+**2. An interactive HTML dashboard** -  Built from the workbook, it turns the generated summaries and pre-defined relationships into customizable visualizations: bar, pie, and line charts, plus cross-tabulations (such as category by location) that can also be displayed as a heatmap. Charts are powered by Plotly.
+
+**3. A failsafe CSV** -  An unmodified copy of the original data, kept so nothing is lost or altered during processing. [confirm this description]
+
+To run it, a user installs the packages listed in a requirements file [and pulls the Mistral model through Ollama], then runs a single command in the terminal.
+
 
 ## Outcome {outcome}
-A fully responsive, accessible portfolio site with custom animations, zero dependencies, and a clear design system — built and shipped for my 2026 job search.
+Completion of the 25 Hour Certificate Program, earning a certified microcredential from NYIT. This project also resulted in a job offer from ETIC, where I now work on multimedia prototyping and data visualizaton design. 
