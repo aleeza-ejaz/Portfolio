@@ -1,30 +1,28 @@
 ## Overview
-This semester, I completed the 25-Hour Certificate Program through New York Tech's Entrepreneurship and Technology Innovation Center [ETIC](https://www.nyit.edu/academics/engineering-and-computing-sciences/etic/), where I worked on a project exploring how AI could make large, unstructured datasets more accessible through visualization.
+This semester, I completed the 25-Hour Certificate Program through New York Tech's Entrepreneurship and Technology Innovation Center [ETIC](https://www.nyit.edu/academics/engineering-and-computing-sciences/etic/), where I worked on a project exploring how AI could make large, unstructured datasets more accessible through an automade analysis pipeline which results in auto-generated data visualizations.
 
 
-## The Challenge
-Designing an AI-powered universal schema structure that could standardize poorly structured datasets and deliver useful findings with customizable charts in one command.
+## Challenge
+Designing an AI-powered universal schema structure that could standardize inconsistent datasets and deliver useful findings with customizable charts in one command.
 
-## Tech Stack {box table}
+## DETAILS {box table}
+### TECH STACK
+
 **Language**:   Python
 **AI / LLM**:   Mistral (open source), run locally through Ollama
 **Data input**:     CSV
-**Data output**:    Excel workbook (22-column schema + summary tab), failsafe CSV [confirm libraries, e.g. pandas, openpyxl]
+**Data output**:    Excel workbook (22-column schema + summary tab), failsafe CSV 
 **Visualization**:  Plotly, HTML dashboard (bar, pie, line, cross-tabulation, heatmap)
 **Setup**:  requirements.txt, single terminal command
 **Development**:    AI-assisted development with Claude, 26 iterations
 
-BACKGROUND 
-In the Spring of 2026, I reached out to the Entrepreneurship & Innovation Technology Center (ETIC) at New York Tech in hopes of getting involved with the NASA patent work they specialize in. Their prerequisite 25 Hour Certificate Program required completion of a major-aligned project to demonstrate your innovative ability and resourcefulness. 
+### BACKGROUND 
+
+In the Spring of 2026, I reached out to the Entrepreneurship & Innovation Technology Center (ETIC) at New York Tech in hopes of getting involved with their patent work for the NASA Technology Transfer Expansion (T2X) program. Their pre-requisite 25 Hour Certificate Program required completion of a major-aligned project to demonstrate your innovative ability and resourcefulness. 
 
 At the same time, ETIC helped host the Whole Health Community Datathon with the NYC Civic Engagement Committee. Students worked in teams to analyze survey data collected from the five boroughs on the social determinants of health. The datasets came from the CEC's The People's Money participatory budgeting process and contained over 10,000 rows. Long survey answers often cluttered the cells, which made it hard to see relationships in the data.
 
 The datathon centered on analysis and visualization, so I built my 25 Hour Program submission around that same problem.
-
-## Design Process {gallery}
-media/design/portfolio-wireframe.png | Early wireframe sketches
-media/design/portfolio-system.png | Design system and color tokens
-media/design/portfolio-final.png | Final homepage
 
 ## Solution
 I directed the development of a Python script powered by a locally run, open-source LLM (Mistral, running through Ollama). It takes an input CSV and produces three outputs:
@@ -33,10 +31,14 @@ I directed the development of a Python script powered by a locally run, open-sou
 
 **2. An interactive HTML dashboard** -  Built from the workbook, it turns the generated summaries and pre-defined relationships into customizable visualizations: bar, pie, and line charts, plus cross-tabulations (such as category by location) that can also be displayed as a heatmap. Charts are powered by Plotly.
 
-**3. A failsafe CSV** -  An unmodified copy of the original data, kept so nothing is lost or altered during processing. [confirm this description]
+**3. A failsafe CSV** -  An unmodified copy of the original data, kept so nothing is lost or altered during processing. 
 
-To run it, a user installs the packages listed in a requirements file [and pulls the Mistral model through Ollama], then runs a single command in the terminal.
+To run it, a user installs the packages listed in a requirements file- pulling the latest Mistral model through Ollama- then runs a single command in the terminal to generate all three files. 
 
+## Design Process {gallery}
+media/design/portfolio-wireframe.png | Early wireframe sketches
+media/design/portfolio-system.png | Design system and color tokens
+media/design/portfolio-final.png | Final homepage
 
 ## Outcome {outcome}
-Completion of the 25 Hour Certificate Program, earning a certified microcredential from NYIT. This project also resulted in a job offer from ETIC, where I now work on multimedia prototyping and data visualizaton design. 
+Completion of the 25 Hour Certificate Program, earning a certified microcredential from NYIT. This project also resulted in a job offer from ETIC, where I now work on multimedia prototyping and data visualizaton design for our various [NASA Technology Transfer Expansion](https://technology.nasa.gov/) (T2X) patented prototype contracts and external projects. 

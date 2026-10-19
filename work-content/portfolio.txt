@@ -10,22 +10,25 @@ We were taught the fundamentals of front-end development, along with the importa
 ## The Challenge
 Designing and building a website that would best convey: "Hi, I'm Aleeza, and this is what I do." 
 
-## Tech Stack {box}
+## DETAILS {box table}
+### Tech Stack
 + **HTML5**:  structure, bringing in my voice
 + **CSS3**: stylization, sharing my vision 
 + **JS**: automation, building the details 
 
-## Details {box}
+
+### BACKGROUND 
 **18-year-old me inspired this project the most.**
 In my senior year of high school, I joined the Yearbook club and got really involved in book's the design process. I ended up illustrating the cover, designing various original tailpieces, and having my art bring together the final aesthetic of the book. I reused some of the ideas I sketched from back then to inspire the color palette and animations you see on the home page, and the rest was designed from there.
 
-## Other Resources Used {box}
+
+### OTHER RESOURCES USED 
 + **Figma**:  early design ideation
 + **Claude**:  sitemap & JS 
 + **Google Gemini**:  portfolio research  
 + **W3Schools**: css revision 
 
 
-## Design Process {gallery}
-media/work-content/header.png | Early wireframe sketches
-media/work-content/ideation.png | Design system and color tokens
+## Media {gallery}
+media/work-content/ideation.png | Early wireframe concepts
+media/work-content/header.png | Finalized hero section

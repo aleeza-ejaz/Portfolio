@@ -997,6 +997,35 @@ nav {
   grid-column: 1 / -1;
 }
 
+/* ── Multiple labeled groups within one box (### Sub Label) ──
+   Spans the full grid width in table mode; harmless outside a
+   grid context (plain box mode). ─────────────────────────────
+──────────────────────────────────────────────────────────────── */
+.work-sidebar-group-label {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.work-sidebar-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--purple);
+  opacity: 0.5;
+  margin: 2px 0 4px;
+}
+
+.work-sidebar-box.blue   .work-sidebar-divider { background: var(--blue); }
+.work-sidebar-box.orange .work-sidebar-divider { background: var(--orange); }
+.work-sidebar-box.pink   .work-sidebar-divider { background: var(--pink); }
+.work-sidebar-box.purple .work-sidebar-divider { background: var(--purple); }
+
+.work-sidebar-plain-group { margin-bottom: 2px; }
+.work-sidebar-plain-group:last-child { margin-bottom: 0; }
+
 .work-sidebar-box.blue   { border-color: rgb(from var(--blue) r g b / 0.4);   background: var(--blue-gradient); }
 .work-sidebar-box.blue   .work-sidebar-box-label { color: var(--blue); }
 .work-sidebar-box.orange { border-color: rgb(from var(--orange) r g b / 0.4); background: var(--orange-gradient); }

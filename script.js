@@ -160,23 +160,42 @@ function parseContentFile(text) {
       return { label: s.label, type: s.type, images };
     }
 
-    if (s.type === 'box' && s.table) {
-      // {box table} — "Label: value" lines become a borderless two-column grid.
-      const items = body.split('\n').map(l => l.trim()).filter(Boolean).map(rawLine => {
-        const line = rawLine.replace(/^[-+*]\s+/, ''); // strip an optional leading bullet marker
-        const colonIndex = line.indexOf(':');
-        if (colonIndex > -1) {
-          return { label: line.slice(0, colonIndex).trim(), value: line.slice(colonIndex + 1).trim() };
-        }
-        return { label: null, value: line };
-      });
-      return { label: s.label, type: 'box', table: true, items };
-    }
-
     if (s.type === 'box') {
-      // Plain {box} — original behavior: one line per item, no table parsing.
-      const items = body.split('\n').map(l => l.trim()).filter(Boolean);
-      return { label: s.label, type: 'box', table: false, items };
+      // A box can hold multiple "### Sub Label" groups, each separated by a
+      // thin divider when rendered. A box with no ### marker is just one
+      // group with no sub-label — identical to the original behavior.
+      const bodyLines = body.split('\n');
+      const groups = [];
+      let current = { label: null, lines: [] };
+      bodyLines.forEach(line => {
+        const sub = line.match(/^###\s+(.+?)\s*$/);
+        if (sub) {
+          if (current.label !== null || current.lines.some(l => l.trim())) groups.push(current);
+          current = { label: sub[1].trim(), lines: [] };
+        } else {
+          current.lines.push(line);
+        }
+      });
+      if (current.label !== null || current.lines.some(l => l.trim())) groups.push(current);
+
+      const parsedGroups = groups.map(g => {
+        const groupBody = g.lines.join('\n').trim();
+        if (s.table) {
+          const items = groupBody.split('\n').map(l => l.trim()).filter(Boolean).map(rawLine => {
+            const line = rawLine.replace(/^[-+*]\s+/, ''); // strip an optional leading bullet marker
+            const colonIndex = line.indexOf(':');
+            if (colonIndex > -1) {
+              return { label: line.slice(0, colonIndex).trim(), value: line.slice(colonIndex + 1).trim() };
+            }
+            return { label: null, value: line };
+          });
+          return { label: g.label, items };
+        }
+        const items = groupBody.split('\n').map(l => l.trim()).filter(Boolean);
+        return { label: g.label, items };
+      });
+
+      return { label: s.label, type: 'box', table: s.table, groups: parsedGroups };
     }
 
     const paragraphs = body.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
@@ -228,27 +247,35 @@ function renderSection(s, color) {
     </div>`;
   }
 
-  if (s.type === 'box' && s.table) {
-    // Each label/value is its own grid cell (not wrapped in a per-row div),
-    // so every row shares one set of column tracks and lines up with every
-    // other row instead of each row sizing its own columns independently.
-    const cells = s.items.map(item => {
-      if (item.label) {
-        return `<span class="work-sidebar-table-label">${formatInline(item.label)}</span><span class="work-sidebar-table-value">${formatInline(item.value)}</span>`;
+  if (s.type === 'box') {
+    // Each group becomes: an optional thin divider (skipped before the
+    // first group), an optional sub-label, then that group's items —
+    // either table cells or a plain line-list, matching s.table.
+    const groupHTML = s.groups.map((group, i) => {
+      const divider = i > 0 ? `<div class="work-sidebar-divider"></div>` : '';
+      const heading = group.label
+        ? `<div class="work-sidebar-group-label">${formatInline(group.label)}</div>`
+        : '';
+
+      let itemsHTML;
+      if (s.table) {
+        itemsHTML = group.items.map(item => {
+          if (item.label) {
+            return `<span class="work-sidebar-table-label">${formatInline(item.label)}</span><span class="work-sidebar-table-value">${formatInline(item.value)}</span>`;
+          }
+          return `<span class="work-sidebar-table-full">${formatInline(item.value)}</span>`;
+        }).join('');
+      } else {
+        itemsHTML = `<div class="work-sidebar-plain-group">${group.items.map(formatInline).join('<br>')}</div>`;
       }
-      return `<span class="work-sidebar-table-full">${formatInline(item.value)}</span>`;
+
+      return `${divider}${heading}${itemsHTML}`;
     }).join('');
 
+    const contentClass = s.table ? 'work-sidebar-box-content work-sidebar-box-content--table' : 'work-sidebar-box-content';
     return `<div class="work-sidebar-box ${color}">
       <div class="work-sidebar-box-label">${s.label}</div>
-      <div class="work-sidebar-box-content work-sidebar-box-content--table">${cells}</div>
-    </div>`;
-  }
-
-  if (s.type === 'box') {
-    return `<div class="work-sidebar-box ${color}">
-      <div class="work-sidebar-box-label">${s.label}</div>
-      <div class="work-sidebar-box-content">${s.items.map(formatInline).join('<br>')}</div>
+      <div class="${contentClass}">${groupHTML}</div>
     </div>`;
   }
 
