@@ -21,7 +21,8 @@
       "tags": ["Python", "Pandas", "Mistral AI", "2026"],
       "contentFile": "work-content/data.txt",
       "links": [
-        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleeza-ejaz/AI-Data-Visualization" }
+        { "label": "View on GitHub ↗", "primary": true, "href": "https://github.com/aleeza-ejaz/AI-Data-Visualization" }, 
+        {"label": "View Final Report ↗", "primary": true, "href": "https://drive.google.com/file/d/1blojsW2h0tdkf3eBZhcAuOw67ORu00gE/view?usp=sharing"}
       ]
     },
     {

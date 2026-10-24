@@ -31,4 +31,6 @@ In my senior year of high school, I joined the Yearbook club and got really invo
 
 ## Media {gallery}
 media/work-content/ideation.png | Early wireframe concepts
+media/work-content/sitemap.png | Sitemap 
 media/work-content/header.png | Finalized hero section
+

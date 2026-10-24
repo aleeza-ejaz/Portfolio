@@ -24,6 +24,9 @@ At the same time, ETIC helped host the Whole Health Community Datathon with the 
 
 The datathon centered on analysis and visualization, so I built my 25 Hour Program submission around that same problem.
 
+### ADDITIONAL RESOURCES 
+lorem ipsum 
+
 ## Solution
 I directed the development of a Python script powered by a locally run, open-source LLM (Mistral, running through Ollama). It takes an input CSV and produces three outputs:
 
